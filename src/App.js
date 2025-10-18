@@ -1,4 +1,4 @@
-import './app.css';
+import './App.css';
 import { motion } from 'framer-motion';
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 
