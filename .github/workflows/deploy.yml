@@ -32,12 +32,12 @@ jobs:
       - name: Build CRA
         run: npm run build
         env:
-          CI: false   # don’t fail on warnings
+          CI: false
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build   # CRA outputs to build/
+          path: build   # CRA output folder
 
   deploy:
     needs: build
