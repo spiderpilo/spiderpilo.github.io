@@ -1,23 +1,134 @@
-import logo from './logo.svg';
-import './App.css';
+import './app.css';
+import { motion } from 'framer-motion';
+import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
+
+// Animation settings
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.4 }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: 'easeOut' }
+  }
+};
 
 function App() {
+  const handleGitHubClick = () => {
+    window.open('https://github.com/spiderpilo', '_blank');
+  };
+
+  const handleAboutClick = () => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleContactClick = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="page-wrapper">
+      {/* HERO SECTION */}
+      <motion.div
+        className="centered hero"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
+        <h1>hi, i&apos;m <span className="bold-name">piolo</span></h1>
+        <p>I code sometimes...</p>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          I am a <b>software engineer</b> based in California with a huge interest
+          in full stack development, AI, and — most of all — beautiful user
+          experience.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <motion.div
+          className="button-row"
+          variants={container}
+          initial="hidden"
+          animate="visible"
         >
-          Learn React
-        </a>
-      </header>
+          {/* About */}
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={handleAboutClick}
+          >
+            About
+          </motion.button>
+
+          {/* GitHub */}
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={handleGitHubClick}
+          >
+            GitHub
+          </motion.button>
+
+          {/* Contact */}
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={handleContactClick}
+          >
+            Contact
+          </motion.button>
+        </motion.div>
+      </motion.div>
+
+      {/* ABOUT SECTION */}
+      <section id="about" className="about-section">
+        <motion.img
+          src={profilePic}
+          alt="Piolo"
+          className="profile-photo"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        />
+        <h2>About Me</h2>
+        <p>
+          Hi, I’m <b>Piolo</b> — a software engineer based in California with a
+          passion for building clean, aesthetic, and meaningful digital experiences.
+          I’m currently studying Computer Science and working on personal projects
+          that combine design, logic, and usability.
+        </p>
+        <p>
+          I enjoy full-stack development, experimenting with AI, and crafting smooth,
+          thoughtful user interfaces. My goal is to create software that feels as good
+          as it looks.
+        </p>
+        <p>
+          When I’m not coding, I’m probably sketching UI ideas, learning something new,
+          or exploring ways technology can make everyday life better.
+        </p>
+      </section>
+
+      {/* CONTACT SECTION */}
+      <section id="contact" className="contact-section">
+        <h2>Contact Me</h2>
+        <p>
+          I’d love to connect! Feel free to reach out at{' '}
+          <a href="mailto:piolo.patag@gmail.com" className="email-link">
+            piolo.patag@gmail.com
+          </a>
+        </p>
+      </section>
     </div>
   );
 }
