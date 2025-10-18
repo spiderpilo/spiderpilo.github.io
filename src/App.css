@@ -33,18 +33,19 @@ html, body {
 
 /* ===== HERO SECTION ===== */
 .centered.hero {
-  flex: 1;                        /* occupy full space */
+  min-height: 100vh;             /* full screen height */
   display: flex;
   flex-direction: column;
-  justify-content: center;        /* vertically center */
-  align-items: center;            /* horizontally center */
-  text-align: center;
+  justify-content: center;       /* vertical centering */
+  align-items: center;           /* horizontal centering */
   width: min(100%, 980px);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 40px 20px 80px;
+  text-align: center;
   box-sizing: border-box;
 }
 
+/* ===== Typography ===== */
 .bold-name {
   font-weight: 800;
   font-size: 2.8rem;
@@ -94,24 +95,22 @@ p {
 }
 
 /* ===== SECTIONS BELOW HERO ===== */
-.section {
+.about-section,
+.contact-section {
   width: min(100%, 860px);
-  padding: 60px 20px;
   margin-inline: auto;
+  padding: 120px 20px;           /* generous breathing room */
   text-align: center;
+  scroll-margin-top: 120px;
 }
 
-.section h2 {
-  margin: 8px 0 14px;
-  color: var(--accent);
-  font-weight: 600;
+.about-section {
+  margin-top: 100px;             /* ensures scrolling needed */
 }
 
-.section p {
-  color: var(--text);
-  opacity: 0.95;
-  line-height: 1.7;
-  margin: 10px auto;
+.contact-section {
+  margin-top: 100px;
+  padding-bottom: 140px;
 }
 
 /* ===== About Image ===== */
@@ -121,8 +120,15 @@ p {
   border-radius: 50%;
   object-fit: cover;
   display: block;
-  margin: 0 auto 18px;
+  margin: 0 auto 28px;
   box-shadow: 0 0 24px rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Section Headings ===== */
+h2 {
+  margin: 8px 0 14px;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* ===== Contact Link ===== */
@@ -153,5 +159,10 @@ p {
   p {
     font-size: 0.95rem;
     padding: 0 10px;
+  }
+
+  .about-section,
+  .contact-section {
+    padding: 80px 16px;
   }
 }
