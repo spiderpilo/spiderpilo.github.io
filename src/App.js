@@ -48,7 +48,7 @@ function App() {
         </h1>
         <p>I code sometimes...</p>
         <p>
-          I am a <b>computer science student</b> at CSULB with a huge interest in full stack
+          I am a <b>Computer Science student</b> at CSULB with a huge interest in full stack
           development, AI, and — most of all — beautiful user experience.
         </p>
 
