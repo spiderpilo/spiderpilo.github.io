@@ -48,7 +48,7 @@ function App() {
         </h1>
         <p>I code sometimes...</p>
         <p>
-          I am a <b>software developer</b> based in California with a huge interest in full stack
+          I am a <b>computer science student</b> at CSULB with a huge interest in full stack
           development, AI, and — most of all — beautiful user experience.
         </p>
 
@@ -102,7 +102,7 @@ function App() {
         />
         <h2>About Me</h2>
         <p>
-          Hi, I’m <b>Piolo</b> — a guy that codes cometimes; based in California with a passion for
+          Hi, I’m <b>Piolo</b> — just a guy that codes sometimes. I am based in California with a passion for
           building clean, aesthetic, and meaningful digital experiences. I’m currently
           studying Computer Science and working on personal projects that combine design,
           logic, and usability.
