@@ -26,6 +26,10 @@ function App() {
     window.open('https://github.com/spiderpilo', '_blank', 'noopener,noreferrer');
   };
 
+  const handleLinkedInClick = () => {
+    window.open('https://www.linkedin.com/in/piolo-patag-5a0b7735b/', '_blank', 'noopener,noreferrer');
+  };
+
   const handleAboutClick = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -78,6 +82,17 @@ function App() {
             GitHub
           </motion.button>
 
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={handleLinkedInClick}
+          >
+            LinkedIn
+          </motion.button>
+
+          
           <motion.button
             className="my-button"
             variants={item}
