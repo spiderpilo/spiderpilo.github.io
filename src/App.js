@@ -117,19 +117,13 @@ function App() {
         />
         <h2>About Me</h2>
         <p>
-          Hi, I’m <b>Piolo</b> — just a guy that codes sometimes. I am based in California with a passion for
-          building clean, aesthetic, and meaningful digital experiences. I’m currently
-          studying Computer Science and working on personal projects that combine design,
-          logic, and usability.
+          Hi, I’m <b>Piolo</b> — a Computer Science student based in California who enjoys building clean, thoughtful, and well-designed software. I’m especially drawn to projects where logic, usability, and visual design come together.
         </p>
         <p>
-          I enjoy full-stack development, experimenting with AI, and crafting smooth,
-          thoughtful user interfaces. My goal is to create software that feels as good
-          as it looks.
+          I work primarily on full-stack applications and enjoy experimenting with AI, focusing on creating interfaces that feel intuitive and purposeful. I care about how software works, but just as much about how it feels to use.
         </p>
         <p>
-          When I’m not coding, I’m probably sketching UI ideas, learning something new,
-          or exploring ways technology can make everyday life better.
+          Outside of coding, I’m usually sketching UI ideas, refining personal projects, or learning something new. I’m always curious about how technology can simplify everyday life and create more meaningful user experiences.
         </p>
       </section>
 
