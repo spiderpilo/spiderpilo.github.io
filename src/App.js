@@ -227,7 +227,7 @@ function App() {
                 className="my-button project-button"
                 whileHover={{ scale: 1.06 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                onClick={() => openLink('https://github.com/spiderpilo')}
+                onClick={() => openLink('https://github.com/spiderpilo/Grocerylist-AI')}
               >
                 View GitHub
               </motion.button>
