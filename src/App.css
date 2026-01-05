@@ -158,3 +158,5 @@ h2 { color: var(--accent); font-weight: 600; }
   .section { padding: 90px 16px; }
   .my-button { padding: 12px 26px; }
 }
+
+.name-letter { display: inline-block; }

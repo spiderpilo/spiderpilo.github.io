@@ -1,19 +1,42 @@
-// src/App.js
 import './App.css';
 import { motion } from 'framer-motion';
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
 
-// Parent animation: controls overall group and staggering
-const container = {
+// Buttons container (stagger)
+const buttonsContainer = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
 };
 
-// Individual button animation
-const item = {
+const buttonItem = {
   hidden: { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
+
+// Name wave: parent waits, then staggers letters
+const nameWaveContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 1.55,  // starts AFTER bubbles settle
+      staggerChildren: 0.08 // wave spacing per letter
+    }
+  }
+};
+
+// Each letter pops up then settles back
+const nameLetter = {
+  hidden: { y: 0, scale: 1 },
+  visible: {
+    y: [0, -14, 0],
+    scale: [1, 1.10, 1],
+    transition: {
+      duration: 0.55,
+      times: [0, 0.35, 1],
+      ease: 'easeOut'
+    }
+  }
 };
 
 function App() {
@@ -26,6 +49,8 @@ function App() {
     });
   };
 
+  const name = 'piolo';
+
   return (
     <div className="page-wrapper">
       {/* HERO */}
@@ -36,7 +61,24 @@ function App() {
         transition={{ duration: 1, ease: 'easeOut' }}
       >
         <h1>
-          hi, i&apos;m <span className="bold-name">piolo</span>
+          hi, i&apos;m{' '}
+          <motion.span
+            className="bold-name"
+            variants={nameWaveContainer}
+            initial="hidden"
+            animate="visible"
+            aria-label={name}
+          >
+            {name.split('').map((ch, idx) => (
+              <motion.span
+                key={`${ch}-${idx}`}
+                className="name-letter"
+                variants={nameLetter}
+              >
+                {ch}
+              </motion.span>
+            ))}
+          </motion.span>
         </h1>
 
         <p>I code sometimes...</p>
@@ -46,10 +88,16 @@ function App() {
           development, AI, and — most of all — <b>beautiful user experience</b>.
         </p>
 
-        <motion.div className="button-row" variants={container} initial="hidden" animate="visible">
+        {/* Buttons (bubbles) */}
+        <motion.div
+          className="button-row"
+          variants={buttonsContainer}
+          initial="hidden"
+          animate="visible"
+        >
           <motion.button
             className="my-button"
-            variants={item}
+            variants={buttonItem}
             whileHover={{ scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToCentered('about')}
@@ -59,7 +107,7 @@ function App() {
 
           <motion.button
             className="my-button"
-            variants={item}
+            variants={buttonItem}
             whileHover={{ scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToCentered('projects')}
@@ -69,7 +117,7 @@ function App() {
 
           <motion.button
             className="my-button"
-            variants={item}
+            variants={buttonItem}
             whileHover={{ scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => openLink('https://github.com/spiderpilo')}
@@ -79,7 +127,7 @@ function App() {
 
           <motion.button
             className="my-button"
-            variants={item}
+            variants={buttonItem}
             whileHover={{ scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}
@@ -89,7 +137,7 @@ function App() {
 
           <motion.button
             className="my-button"
-            variants={item}
+            variants={buttonItem}
             whileHover={{ scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToCentered('contact')}
@@ -127,20 +175,12 @@ function App() {
       </section>
 
       {/* PROJECTS */}
-      <section
-        id="projects"
-        className="section projects-section"
-        style={{ width: 'min(100%, 1100px)' }} // wider than default section so the image can grow
-      >
+      <section id="projects" className="section projects-section" style={{ width: 'min(100%, 1100px)' }}>
         <h2>Projects</h2>
 
         <motion.article
           className="project-card"
-          style={{
-            gridTemplateColumns: '2fr 1fr', // bigger screenshot, text same size
-            alignItems: 'start',
-            gap: '24px'
-          }}
+          style={{ gridTemplateColumns: '2fr 1fr', alignItems: 'start', gap: '24px' }}
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: 'easeOut', delay: 0.15 }}
