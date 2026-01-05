@@ -1,9 +1,10 @@
+// src/App.js
 import './App.css';
 import { motion } from 'framer-motion';
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
 
-// Button animation container
+// Parent animation: controls overall group and staggering
 const container = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
@@ -41,32 +42,58 @@ function App() {
         <p>I code sometimes...</p>
 
         <p>
-          I am a <b>Computer Science student</b> at CSULB with a strong interest in full-stack
-          development, AI, and thoughtful user experience.
+          I am a <b>Computer Science student</b> at CSULB with a huge interest in full stack
+          development, AI, and — most of all — <b>beautiful user experience</b>.
         </p>
 
         <motion.div className="button-row" variants={container} initial="hidden" animate="visible">
-          <motion.button className="my-button" variants={item} onClick={() => scrollToCentered('about')}>
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={() => scrollToCentered('about')}
+          >
             About
           </motion.button>
 
-          <motion.button className="my-button" variants={item} onClick={() => scrollToCentered('projects')}>
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={() => scrollToCentered('projects')}
+          >
             Projects
           </motion.button>
 
-          <motion.button className="my-button" variants={item} onClick={() => openLink('https://github.com/spiderpilo')}>
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={() => openLink('https://github.com/spiderpilo')}
+          >
             GitHub
           </motion.button>
 
           <motion.button
             className="my-button"
             variants={item}
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}
           >
             LinkedIn
           </motion.button>
 
-          <motion.button className="my-button" variants={item} onClick={() => scrollToCentered('contact')}>
+          <motion.button
+            className="my-button"
+            variants={item}
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            onClick={() => scrollToCentered('contact')}
+          >
             Contact
           </motion.button>
         </motion.div>
@@ -103,16 +130,14 @@ function App() {
       <section
         id="projects"
         className="section projects-section"
-        // IMPORTANT: override the .section 860px max width so the image can actually grow
-        style={{ width: 'min(100%, 1100px)' }}
+        style={{ width: 'min(100%, 1100px)' }} // wider than default section so the image can grow
       >
         <h2>Projects</h2>
 
         <motion.article
           className="project-card"
-          // IMPORTANT: make image column larger (this is the main visual change)
           style={{
-            gridTemplateColumns: '2fr 1fr', // bigger screenshot, text stays same size
+            gridTemplateColumns: '2fr 1fr', // bigger screenshot, text same size
             alignItems: 'start',
             gap: '24px'
           }}
@@ -123,7 +148,6 @@ function App() {
         >
           <motion.div
             className="project-image-wrap"
-            // IMPORTANT: allow more height so the screenshot is easier to read
             style={{ maxHeight: '650px' }}
             initial={{ opacity: 0, scale: 0.94 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -163,7 +187,7 @@ function App() {
                 className="my-button project-button"
                 whileHover={{ scale: 1.06 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                onClick={() => openLink('https://github.com/spiderpilo/Grocerylist-AI')}
+                onClick={() => openLink('https://github.com/spiderpilo')}
               >
                 View GitHub
               </motion.button>

@@ -1,3 +1,4 @@
+/* src/App.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
 :root {
@@ -19,9 +20,7 @@ html, body {
   scroll-behavior: smooth;
 }
 
-.page-wrapper {
-  min-height: 100vh;
-}
+.page-wrapper { min-height: 100vh; }
 
 /* HERO */
 .centered.hero {
@@ -41,7 +40,11 @@ h1 { margin-bottom: 10px; }
 .bold-name {
   font-weight: 800;
   font-size: 3rem;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+  color: #fff;
+  text-shadow:
+    0 0 5px rgba(255, 255, 255, 0.6),
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 25px rgba(255, 255, 255, 0.2);
 }
 
 p {
@@ -64,19 +67,23 @@ p {
   color: var(--text);
   padding: 14px 34px;
   border: none;
-  border-radius: 12px;
+  border-radius: 16px; /* bubble feel */
   cursor: pointer;
   font-size: 16px;
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  transform: scale(1); /* IMPORTANT: ensures hover always has a baseline */
+  will-change: transform;
 }
 
+/* IMPORTANT: this is what makes the bubbles expand on hover */
 .my-button:hover {
+  transform: translateY(-2px) scale(1.12);
   background: var(--btn-hover);
-  transform: scale(1.05);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* SECTIONS */
+/* Sections */
 .section {
   width: min(100%, 860px);
   margin-inline: auto;
@@ -85,10 +92,7 @@ p {
   scroll-margin-top: 120px;
 }
 
-h2 {
-  color: var(--accent);
-  font-weight: 600;
-}
+h2 { color: var(--accent); font-weight: 600; }
 
 /* ABOUT */
 .profile-photo {
@@ -97,30 +101,26 @@ h2 {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 28px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.1);
 }
 
 /* PROJECTS */
 .project-card {
   display: grid;
-  grid-template-columns: 1.5fr 1.2fr; /* image larger */
   gap: 22px;
   padding: 20px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   text-align: left;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
 .project-image-wrap {
   border-radius: 14px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.22);
-  max-height: 520px;
-  transition: transform 0.4s ease;
-}
-
-.project-image-wrap:hover {
-  transform: scale(1.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .project-image {
@@ -136,44 +136,25 @@ h2 {
   font-size: 1.4rem;
 }
 
-.project-description {
-  opacity: 0.9;
-}
+.project-description { opacity: 0.92; }
 
 .project-highlights {
   padding-left: 18px;
   line-height: 1.7;
+  opacity: 0.92;
 }
 
-.project-actions {
-  margin-top: 10px;
-}
+.project-actions { margin-top: 10px; }
 
-.project-button {
-  padding: 12px 22px;
-}
+.project-button { padding: 12px 22px; }
 
 /* CONTACT */
-.email-link {
-  color: var(--accent);
-  text-decoration: none;
-}
+.email-link { color: var(--accent); text-decoration: none; }
+.email-link:hover { text-decoration: underline; }
 
-.email-link:hover {
-  text-decoration: underline;
-}
-
-/* MOBILE */
+/* Mobile */
 @media (max-width: 640px) {
   .bold-name { font-size: 2.2rem; }
-
   .section { padding: 90px 16px; }
-
-  .project-card {
-    grid-template-columns: 1fr;
-  }
-
-  .project-image-wrap {
-    max-height: none;
-  }
+  .my-button { padding: 12px 26px; }
 }
