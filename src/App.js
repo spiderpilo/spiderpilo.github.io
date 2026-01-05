@@ -268,7 +268,7 @@ function App() {
               <h3 className="project-title">Assistive Social Cue Companion</h3>
 
               <p className="project-description">
-                An early-stage assistive tool designed to support autistic and neurodivergent people in social
+                An early-stage assistive tool designed to support people with autism or neurodivergent in social
                 situations by providing gentle, real-time context (emotion cues + “sarcasm likelihood”) — framed
                 as supportive and non-diagnostic.
               </p>
