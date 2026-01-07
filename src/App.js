@@ -1,5 +1,7 @@
 import './App.css';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useCallback, useMemo } from 'react';
+
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
 import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
@@ -15,18 +17,16 @@ const buttonItem = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } }
 };
 
-// Name wave: parent waits, then staggers letters
 const nameWaveContainer = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 1.55, // starts AFTER bubbles settle
+      delayChildren: 1.55, 
       staggerChildren: 0.08
     }
   }
 };
 
-// Each letter pops up then settles back
 const nameLetter = {
   hidden: { y: 0, scale: 1 },
   visible: {
@@ -40,7 +40,6 @@ const nameLetter = {
   }
 };
 
-// Project card fade-in (reusable)
 const projectCardMotion = {
   initial: { opacity: 0, y: 60 },
   whileInView: { opacity: 1, y: 0 },
@@ -48,53 +47,88 @@ const projectCardMotion = {
   viewport: { once: true, amount: 0.35 }
 };
 
-// Same animation, just a slightly different delay (avoids duplicate props)
-const projectCardMotionSecond = {
-  ...projectCardMotion,
-  transition: { ...projectCardMotion.transition, delay: 0.2 }
-};
-
 function App() {
-  const openLink = (url) => window.open(url, '_blank', 'noopener,noreferrer');
+  const shouldReduceMotion = useReducedMotion();
 
-  // Centered scroll (nice for About/Contact)
-  const scrollToCentered = (id) => {
+  const openLink = useCallback((url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }, []);
+
+
+  const scrollToCentered = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth',
       block: 'center'
     });
-  };
+  }, []);
 
-  // Top scroll (nice for Projects so it lands at the start of the stack)
-  const scrollToTop = (id) => {
+  const scrollToTop = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
-  };
+  }, []);
 
   const name = 'piolo';
+
+  const projects = useMemo(
+    () => [
+      {
+        title: 'AI-Powered Grocery List Assistant',
+        image: groceryPic,
+        alt: 'AI-Powered Grocery List Assistant',
+        tech: ['React', 'Electron', 'Node.js', 'OpenAI API'],
+        description:
+          'A personalized grocery list app that learns from past lists to suggest items you actually buy together — avoiding generic recommendations.',
+        highlights: [
+          'Generates suggestions from current + historical lists',
+          'Designed for fast, low-friction everyday use',
+          'Focused on practical, user-specific behavior'
+        ],
+        githubUrl: 'https://github.com/spiderpilo/Grocerylist-AI'
+      },
+      {
+        title: 'Assistive Social Cue Companion',
+        image: socialCuePic,
+        alt: 'Assistive Social Cue Companion',
+        tech: ['React', 'JavaScript', 'Webcam', 'HTML5 Video'],
+        description:
+          'An early-stage assistive tool designed to support people with autism or neurodivergent in social situations by providing gentle, real-time context (emotion cues + “sarcasm likelihood”) — framed as supportive and non-diagnostic.',
+        highlights: [
+          'Real-time webcam overlay for emotion-aware feedback',
+          'Sarcasm analyzer that gives a quick “tone check” for messages',
+          'Built around clarity, consent, and user-centered design'
+        ],
+        githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion'
+      }
+    ],
+    []
+  );
 
   return (
     <div className="page-wrapper">
       {/* HERO */}
       <motion.div
         className="centered hero"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+        animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
         <h1>
           hi, i&apos;m{' '}
           <motion.span
             className="bold-name"
-            variants={nameWaveContainer}
-            initial="hidden"
-            animate="visible"
+            variants={shouldReduceMotion ? undefined : nameWaveContainer}
+            initial={shouldReduceMotion ? false : 'hidden'}
+            animate={shouldReduceMotion ? undefined : 'visible'}
             aria-label={name}
           >
             {name.split('').map((ch, idx) => (
-              <motion.span key={`${ch}-${idx}`} className="name-letter" variants={nameLetter}>
+              <motion.span
+                key={`${ch}-${idx}`}
+                className="name-letter"
+                variants={shouldReduceMotion ? undefined : nameLetter}
+              >
                 {ch}
               </motion.span>
             ))}
@@ -109,11 +143,16 @@ function App() {
         </p>
 
         {/* Buttons (bubbles) */}
-        <motion.div className="button-row" variants={buttonsContainer} initial="hidden" animate="visible">
+        <motion.div
+          className="button-row"
+          variants={shouldReduceMotion ? undefined : buttonsContainer}
+          initial={shouldReduceMotion ? false : 'hidden'}
+          animate={shouldReduceMotion ? undefined : 'visible'}
+        >
           <motion.button
             className="my-button"
-            variants={buttonItem}
-            whileHover={{ scale: 1.15 }}
+            variants={shouldReduceMotion ? undefined : buttonItem}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToCentered('about')}
           >
@@ -122,18 +161,18 @@ function App() {
 
           <motion.button
             className="my-button"
-            variants={buttonItem}
-            whileHover={{ scale: 1.15 }}
+            variants={shouldReduceMotion ? undefined : buttonItem}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
-            onClick={() => scrollToTop('projects')}  
+            onClick={() => scrollToTop('projects')}
           >
             Projects
           </motion.button>
 
           <motion.button
             className="my-button"
-            variants={buttonItem}
-            whileHover={{ scale: 1.15 }}
+            variants={shouldReduceMotion ? undefined : buttonItem}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => openLink('https://github.com/spiderpilo')}
           >
@@ -142,8 +181,8 @@ function App() {
 
           <motion.button
             className="my-button"
-            variants={buttonItem}
-            whileHover={{ scale: 1.15 }}
+            variants={shouldReduceMotion ? undefined : buttonItem}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}
           >
@@ -152,8 +191,8 @@ function App() {
 
           <motion.button
             className="my-button"
-            variants={buttonItem}
-            whileHover={{ scale: 1.15 }}
+            variants={shouldReduceMotion ? undefined : buttonItem}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
             transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToCentered('contact')}
           >
@@ -168,8 +207,8 @@ function App() {
           src={profilePic}
           alt="Piolo"
           className="profile-photo"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
+          whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.4 }}
         />
@@ -191,106 +230,64 @@ function App() {
         <h2>Projects</h2>
 
         <div className="projects-list">
-          {/* PROJECT 1 */}
-          <motion.article className="project-card" {...projectCardMotion}>
-            <motion.div
-              className="project-image-wrap"
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.0, ease: 'easeOut', delay: 0.25 }}
-              viewport={{ once: true, amount: 0.45 }}
-            >
-              <img
-                src={groceryPic}
-                alt="AI-Powered Grocery List Assistant"
-                className="project-image"
-                loading="lazy"
-              />
-            </motion.div>
+          {projects.map((p, index) => {
+            const motionProps =
+              index === 0
+                ? projectCardMotion
+                : { ...projectCardMotion, transition: { ...projectCardMotion.transition, delay: 0.2 } };
 
-            <motion.div
-              className="project-content"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.35 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="project-title">AI-Powered Grocery List Assistant</h3>
-
-              <p className="project-description">
-                A personalized grocery list app that learns from past lists to suggest items you actually buy
-                together — avoiding generic recommendations.
-              </p>
-
-              <ul className="project-highlights">
-                <li>Generates suggestions from current + historical lists</li>
-                <li>Designed for fast, low-friction everyday use</li>
-                <li>Focused on practical, user-specific behavior</li>
-              </ul>
-
-              <div className="project-actions">
-                <motion.button
-                  className="my-button project-button"
-                  whileHover={{ scale: 1.06 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  onClick={() => openLink('https://github.com/spiderpilo/Grocerylist-AI')}
+            return (
+              <motion.article key={p.title} className="project-card" {...(shouldReduceMotion ? {} : motionProps)}>
+                <motion.div
+                  className="project-image-wrap"
+                  initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
+                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.0, ease: 'easeOut', delay: 0.25 }}
+                  viewport={{ once: true, amount: 0.45 }}
                 >
-                  View GitHub
-                </motion.button>
-              </div>
-            </motion.div>
-          </motion.article>
+                  <img src={p.image} alt={p.alt} className="project-image" loading="lazy" />
+                </motion.div>
 
-          {/* PROJECT 2 */}
-          <motion.article className="project-card" {...projectCardMotionSecond}>
-            <motion.div
-              className="project-image-wrap"
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.0, ease: 'easeOut', delay: 0.25 }}
-              viewport={{ once: true, amount: 0.45 }}
-            >
-              <img
-                src={socialCuePic}
-                alt="Assistive Social Cue Companion"
-                className="project-image"
-                loading="lazy"
-              />
-            </motion.div>
-
-            <motion.div
-              className="project-content"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.35 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="project-title">Assistive Social Cue Companion</h3>
-
-              <p className="project-description">
-                An early-stage assistive tool designed to support people with autism or neurodivergent in social
-                situations by providing gentle, real-time context (emotion cues + “sarcasm likelihood”) — framed
-                as supportive and non-diagnostic.
-              </p>
-
-              <ul className="project-highlights">
-                <li>Real-time webcam overlay for emotion-aware feedback</li>
-                <li>Sarcasm analyzer that gives a quick “tone check” for messages</li>
-                <li>Built around clarity, consent, and user-centered design</li>
-              </ul>
-
-              <div className="project-actions">
-                <motion.button
-                  className="my-button project-button"
-                  whileHover={{ scale: 1.06 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  onClick={() => openLink('https://github.com/spiderpilo/Assistive-Social-Cue-Companion')}
+                <motion.div
+                  className="project-content"
+                  initial={shouldReduceMotion ? false : { opacity: 0 }}
+                  whileInView={shouldReduceMotion ? undefined : { opacity: 1 }}
+                  transition={{ duration: 0.9, delay: 0.35 }}
+                  viewport={{ once: true }}
                 >
-                  View GitHub
-                </motion.button>
-              </div>
-            </motion.div>
-          </motion.article>
+                  <h3 className="project-title">{p.title}</h3>
+
+                  {/* TECH STACK (chips) */}
+                  <div className="tech-row" aria-label={`${p.title} tech stack`}>
+                    {p.tech.map((t) => (
+                      <span key={`${p.title}-${t}`} className="tech-chip">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="project-description">{p.description}</p>
+
+                  <ul className="project-highlights">
+                    {p.highlights.map((h) => (
+                      <li key={h}>{h}</li>
+                    ))}
+                  </ul>
+
+                  <div className="project-actions">
+                    <motion.button
+                      className="my-button project-button"
+                      whileHover={shouldReduceMotion ? undefined : { scale: 1.06 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                      onClick={() => openLink(p.githubUrl)}
+                    >
+                      View GitHub
+                    </motion.button>
+                  </div>
+                </motion.div>
+              </motion.article>
+            );
+          })}
         </div>
       </section>
 

@@ -212,3 +212,19 @@ h2 {
   .my-button { padding: 12px 26px; }
   .section { padding: 90px 16px; }
 }
+
+.tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 14px;
+}
+
+.tech-chip {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+}
