@@ -1,3 +1,4 @@
+// App.js
 import './App.css';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useMemo } from 'react';
@@ -5,26 +6,27 @@ import { useCallback, useMemo } from 'react';
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
 import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
+import cafeFinderPic from './Assets/CafeFinder.png';
 
 // Buttons container (stagger)
 const buttonsContainer = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
 };
 
 const buttonItem = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
 const nameWaveContainer = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 1.55, 
-      staggerChildren: 0.08
-    }
-  }
+      delayChildren: 1.55,
+      staggerChildren: 0.08,
+    },
+  },
 };
 
 const nameLetter = {
@@ -35,16 +37,16 @@ const nameLetter = {
     transition: {
       duration: 0.55,
       times: [0, 0.35, 1],
-      ease: 'easeOut'
-    }
-  }
+      ease: 'easeOut',
+    },
+  },
 };
 
 const projectCardMotion = {
   initial: { opacity: 0, y: 60 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 1.1, ease: 'easeOut', delay: 0.1 },
-  viewport: { once: true, amount: 0.35 }
+  viewport: { once: true, amount: 0.35 },
 };
 
 function App() {
@@ -54,18 +56,17 @@ function App() {
     window.open(url, '_blank', 'noopener,noreferrer');
   }, []);
 
-
   const scrollToCentered = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth',
-      block: 'center'
+      block: 'center',
     });
   }, []);
 
   const scrollToTop = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
+      block: 'start',
     });
   }, []);
 
@@ -83,9 +84,9 @@ function App() {
         highlights: [
           'Generates suggestions from current + historical lists',
           'Designed for fast, low-friction everyday use',
-          'Focused on practical, user-specific behavior'
+          'Focused on practical, user-specific behavior',
         ],
-        githubUrl: 'https://github.com/spiderpilo/Grocerylist-AI'
+        githubUrl: 'https://github.com/spiderpilo/Grocerylist-AI',
       },
       {
         title: 'Assistive Social Cue Companion',
@@ -97,10 +98,27 @@ function App() {
         highlights: [
           'Real-time webcam overlay for emotion-aware feedback',
           'Sarcasm analyzer that gives a quick “tone check” for messages',
-          'Built around clarity, consent, and user-centered design'
+          'Built around clarity, consent, and user-centered design',
         ],
-        githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion'
-      }
+        githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion',
+      },
+
+      // ✅ Cafe Finder (fixed copy + naming consistency)
+      {
+        title: 'Café Finder',
+        image: cafeFinderPic,
+        alt: 'Café Finder',
+        tech: ['React', 'Vite', 'Node.js', 'Google Maps API'],
+        description:
+          'A fast, clean, location-based café discovery tool that helps you find great coffee nearby — without drowning you in big chains.',
+        highlights: [
+          'Search cafés by ZIP code or current location',
+          'Ranks results by a quality score and down-weights large chains',
+          'Deployed and ready to use',
+        ],
+        liveUrl: 'https://cafe-finder-9sys6jn12-piolos-projects-b34180f7.vercel.app/',
+        githubUrl: 'https://github.com/spiderpilo/Cafe-Finder',
+      },
     ],
     []
   );
@@ -138,11 +156,10 @@ function App() {
         <p>I code sometimes...</p>
 
         <p>
-          I am a <b>Computer Science student</b> at CSULB with a huge interest in full stack development, AI,
-          and — most of all — <b>beautiful user experience</b>.
+          I am a <b>Computer Science student</b> at CSULB with a huge interest in full stack development,
+          AI, and — most of all — <b>beautiful user experience</b>.
         </p>
 
-        {/* Buttons (bubbles) */}
         <motion.div
           className="button-row"
           variants={shouldReduceMotion ? undefined : buttonsContainer}
@@ -152,8 +169,6 @@ function App() {
           <motion.button
             className="my-button"
             variants={shouldReduceMotion ? undefined : buttonItem}
-            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
-            transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToCentered('about')}
           >
             About
@@ -162,8 +177,6 @@ function App() {
           <motion.button
             className="my-button"
             variants={shouldReduceMotion ? undefined : buttonItem}
-            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
-            transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToTop('projects')}
           >
             Projects
@@ -172,8 +185,6 @@ function App() {
           <motion.button
             className="my-button"
             variants={shouldReduceMotion ? undefined : buttonItem}
-            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
-            transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => openLink('https://github.com/spiderpilo')}
           >
             GitHub
@@ -182,8 +193,6 @@ function App() {
           <motion.button
             className="my-button"
             variants={shouldReduceMotion ? undefined : buttonItem}
-            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
-            transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}
           >
             LinkedIn
@@ -192,8 +201,6 @@ function App() {
           <motion.button
             className="my-button"
             variants={shouldReduceMotion ? undefined : buttonItem}
-            whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
-            transition={{ type: 'spring', stiffness: 300 }}
             onClick={() => scrollToCentered('contact')}
           >
             Contact
@@ -214,15 +221,21 @@ function App() {
         />
 
         <h2>About Me</h2>
+
         <p>
           Hi, I’m <b>Piolo</b> — a Computer Science student based in California who enjoys building clean,
           thoughtful, and well-designed software.
         </p>
+
         <p>
           I focus on full-stack applications and AI-assisted tools, with an emphasis on usability and
           human-centered design.
         </p>
-        <p>Outside of coding, I’m usually sketching UI ideas, refining personal projects, or learning something new.</p>
+
+        <p>
+          Outside of coding, I’m usually sketching UI ideas, refining personal projects, or learning
+          something new.
+        </p>
       </section>
 
       {/* PROJECTS */}
@@ -234,31 +247,25 @@ function App() {
             const motionProps =
               index === 0
                 ? projectCardMotion
-                : { ...projectCardMotion, transition: { ...projectCardMotion.transition, delay: 0.2 } };
+                : {
+                    ...projectCardMotion,
+                    transition: { ...projectCardMotion.transition, delay: 0.2 },
+                  };
 
             return (
-              <motion.article key={p.title} className="project-card" {...(shouldReduceMotion ? {} : motionProps)}>
-                <motion.div
-                  className="project-image-wrap"
-                  initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
-                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.0, ease: 'easeOut', delay: 0.25 }}
-                  viewport={{ once: true, amount: 0.45 }}
-                >
+              <motion.article
+                key={p.title}
+                className="project-card"
+                {...(shouldReduceMotion ? {} : motionProps)}
+              >
+                <motion.div className="project-image-wrap">
                   <img src={p.image} alt={p.alt} className="project-image" loading="lazy" />
                 </motion.div>
 
-                <motion.div
-                  className="project-content"
-                  initial={shouldReduceMotion ? false : { opacity: 0 }}
-                  whileInView={shouldReduceMotion ? undefined : { opacity: 1 }}
-                  transition={{ duration: 0.9, delay: 0.35 }}
-                  viewport={{ once: true }}
-                >
+                <motion.div className="project-content">
                   <h3 className="project-title">{p.title}</h3>
 
-                  {/* TECH STACK (chips) */}
-                  <div className="tech-row" aria-label={`${p.title} tech stack`}>
+                  <div className="tech-row">
                     {p.tech.map((t) => (
                       <span key={`${p.title}-${t}`} className="tech-chip">
                         {t}
@@ -275,10 +282,18 @@ function App() {
                   </ul>
 
                   <div className="project-actions">
+                    {p.liveUrl && (
+                      <motion.button
+                        className="my-button project-button"
+                        onClick={() => openLink(p.liveUrl)}
+                        style={{ marginRight: 12 }}
+                      >
+                        Visit Website
+                      </motion.button>
+                    )}
+
                     <motion.button
                       className="my-button project-button"
-                      whileHover={shouldReduceMotion ? undefined : { scale: 1.06 }}
-                      transition={{ type: 'spring', stiffness: 300 }}
                       onClick={() => openLink(p.githubUrl)}
                     >
                       View GitHub
