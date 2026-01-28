@@ -116,7 +116,7 @@ function App() {
           'Ranks results by a quality score and down-weights large chains',
           'Deployed and ready to use',
         ],
-        liveUrl: 'https://cafe-finder-9sys6jn12-piolos-projects-b34180f7.vercel.app/',
+        liveUrl: 'https://cafe-finder-brown.vercel.app',
         githubUrl: 'https://github.com/spiderpilo/Cafe-Finder',
       },
     ],
