@@ -88,7 +88,7 @@ function App() {
           'Transforms reflections into structured multi-page narratives with AI-generated visuals',
           'Interactive storybook UI with animations and PDF export',
         ],
-        liveUrl: 'https://mirrortale.vercel.app', // 🔁 replace if needed
+        liveUrl: 'https://www.mirrorttale.org/', // 🔁 replace if needed
         githubUrl: 'https://github.com/spiderpilo/MirrorTale',
       },
 
