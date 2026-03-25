@@ -7,6 +7,7 @@ import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jp
 import groceryPic from './Assets/GroceryListAI.png';
 import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
 import cafeFinderPic from './Assets/CafeFinder.png';
+import mirrorTalePic from './Assets/MirrorTale.png'; // ✅ added
 
 // Buttons container (stagger)
 const buttonsContainer = {
@@ -74,6 +75,40 @@ function App() {
 
   const projects = useMemo(
     () => [
+      // 🔥 1. MirrorTale (strongest)
+      {
+        title: 'MirrorTale',
+        image: mirrorTalePic,
+        alt: 'MirrorTale',
+        tech: ['React', 'Node.js', 'Express', 'OpenAI API'],
+        description:
+          'An AI-powered reflection companion that transforms your thoughts into a personalized illustrated storybook through guided, Socratic-style conversations.',
+        highlights: [
+          'Guides users through reflection without giving direct advice',
+          'Transforms reflections into structured multi-page narratives with AI-generated visuals',
+          'Interactive storybook UI with animations and PDF export',
+        ],
+        liveUrl: 'https://mirrortale.vercel.app', // 🔁 replace if needed
+        githubUrl: 'https://github.com/spiderpilo/MirrorTale',
+      },
+
+      // 🧠 2. Assistive Social Cue Companion
+      {
+        title: 'Assistive Social Cue Companion',
+        image: socialCuePic,
+        alt: 'Assistive Social Cue Companion',
+        tech: ['React', 'JavaScript', 'Webcam', 'TensorFlow.js'],
+        description:
+          'An assistive AI tool designed to support neurodivergent users in social situations by providing real-time context around facial expressions and tone.',
+        highlights: [
+          'Real-time emotion detection using webcam input',
+          'Sarcasm likelihood feedback powered by AI',
+          'Designed with a user-centered, non-diagnostic approach',
+        ],
+        githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion',
+      },
+
+      // 🛒 3. Grocery List AI
       {
         title: 'AI-Powered Grocery List Assistant',
         image: groceryPic,
@@ -88,22 +123,8 @@ function App() {
         ],
         githubUrl: 'https://github.com/spiderpilo/Grocerylist-AI',
       },
-      {
-        title: 'Assistive Social Cue Companion',
-        image: socialCuePic,
-        alt: 'Assistive Social Cue Companion',
-        tech: ['React', 'JavaScript', 'Webcam', 'HTML5 Video'],
-        description:
-          'An early-stage assistive tool designed to support people with autism or neurodivergent in social situations by providing gentle, real-time context (emotion cues + “sarcasm likelihood”) — framed as supportive and non-diagnostic.',
-        highlights: [
-          'Real-time webcam overlay for emotion-aware feedback',
-          'Sarcasm analyzer that gives a quick “tone check” for messages',
-          'Built around clarity, consent, and user-centered design',
-        ],
-        githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion',
-      },
 
-      // ✅ Cafe Finder (fixed copy + naming consistency)
+      // ☕ 4. Café Finder (still solid, but less unique)
       {
         title: 'Café Finder',
         image: cafeFinderPic,
@@ -166,43 +187,23 @@ function App() {
           initial={shouldReduceMotion ? false : 'hidden'}
           animate={shouldReduceMotion ? undefined : 'visible'}
         >
-          <motion.button
-            className="my-button"
-            variants={shouldReduceMotion ? undefined : buttonItem}
-            onClick={() => scrollToCentered('about')}
-          >
+          <motion.button className="my-button" variants={buttonItem} onClick={() => scrollToCentered('about')}>
             About
           </motion.button>
 
-          <motion.button
-            className="my-button"
-            variants={shouldReduceMotion ? undefined : buttonItem}
-            onClick={() => scrollToTop('projects')}
-          >
+          <motion.button className="my-button" variants={buttonItem} onClick={() => scrollToTop('projects')}>
             Projects
           </motion.button>
 
-          <motion.button
-            className="my-button"
-            variants={shouldReduceMotion ? undefined : buttonItem}
-            onClick={() => openLink('https://github.com/spiderpilo')}
-          >
+          <motion.button className="my-button" variants={buttonItem} onClick={() => openLink('https://github.com/spiderpilo')}>
             GitHub
           </motion.button>
 
-          <motion.button
-            className="my-button"
-            variants={shouldReduceMotion ? undefined : buttonItem}
-            onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}
-          >
+          <motion.button className="my-button" variants={buttonItem} onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}>
             LinkedIn
           </motion.button>
 
-          <motion.button
-            className="my-button"
-            variants={shouldReduceMotion ? undefined : buttonItem}
-            onClick={() => scrollToCentered('contact')}
-          >
+          <motion.button className="my-button" variants={buttonItem} onClick={() => scrollToCentered('contact')}>
             Contact
           </motion.button>
         </motion.div>
@@ -214,10 +215,10 @@ function App() {
           src={profilePic}
           alt="Piolo"
           className="profile-photo"
-          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
-          whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          viewport={{ once: true, amount: 0.4 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
         />
 
         <h2>About Me</h2>
@@ -253,21 +254,17 @@ function App() {
                   };
 
             return (
-              <motion.article
-                key={p.title}
-                className="project-card"
-                {...(shouldReduceMotion ? {} : motionProps)}
-              >
-                <motion.div className="project-image-wrap">
+              <motion.article key={p.title} className="project-card" {...motionProps}>
+                <div className="project-image-wrap">
                   <img src={p.image} alt={p.alt} className="project-image" loading="lazy" />
-                </motion.div>
+                </div>
 
-                <motion.div className="project-content">
+                <div className="project-content">
                   <h3 className="project-title">{p.title}</h3>
 
                   <div className="tech-row">
                     {p.tech.map((t) => (
-                      <span key={`${p.title}-${t}`} className="tech-chip">
+                      <span key={t} className="tech-chip">
                         {t}
                       </span>
                     ))}
@@ -283,23 +280,16 @@ function App() {
 
                   <div className="project-actions">
                     {p.liveUrl && (
-                      <motion.button
-                        className="my-button project-button"
-                        onClick={() => openLink(p.liveUrl)}
-                        style={{ marginRight: 12 }}
-                      >
+                      <button className="my-button project-button" onClick={() => openLink(p.liveUrl)}>
                         Visit Website
-                      </motion.button>
+                      </button>
                     )}
 
-                    <motion.button
-                      className="my-button project-button"
-                      onClick={() => openLink(p.githubUrl)}
-                    >
+                    <button className="my-button project-button" onClick={() => openLink(p.githubUrl)}>
                       View GitHub
-                    </motion.button>
+                    </button>
                   </div>
-                </motion.div>
+                </div>
               </motion.article>
             );
           })}
