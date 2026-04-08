@@ -1,15 +1,14 @@
-// App.js
 import './App.css';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useMemo } from 'react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
 import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
 import cafeFinderPic from './Assets/CafeFinder.png';
-import mirrorTalePic from './Assets/MirrorTale.png'; // ✅ added
+import mirrorTalePic from './Assets/MirrorTale.png';
 
-// Buttons container (stagger)
 const buttonsContainer = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -75,7 +74,6 @@ function App() {
 
   const projects = useMemo(
     () => [
-      // 🔥 1. MirrorTale (strongest)
       {
         title: 'MirrorTale',
         image: mirrorTalePic,
@@ -88,11 +86,9 @@ function App() {
           'Transforms reflections into structured multi-page narratives with AI-generated visuals',
           'Interactive storybook UI with animations and PDF export',
         ],
-        liveUrl: 'https://www.mirrorttale.org/', // 🔁 replace if needed
+        liveUrl: 'https://www.mirrorttale.org/',
         githubUrl: 'https://github.com/spiderpilo/MirrorTale',
       },
-
-      // 🧠 2. Assistive Social Cue Companion
       {
         title: 'Assistive Social Cue Companion',
         image: socialCuePic,
@@ -107,8 +103,6 @@ function App() {
         ],
         githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion',
       },
-
-      // 🛒 3. Grocery List AI
       {
         title: 'AI-Powered Grocery List Assistant',
         image: groceryPic,
@@ -123,8 +117,6 @@ function App() {
         ],
         githubUrl: 'https://github.com/spiderpilo/Grocerylist-AI',
       },
-
-      // ☕ 4. Café Finder (still solid, but less unique)
       {
         title: 'Café Finder',
         image: cafeFinderPic,
@@ -146,7 +138,15 @@ function App() {
 
   return (
     <div className="page-wrapper">
-      {/* HERO */}
+      <div className="background-bubbles">
+        <span className="bubble bubble-1"></span>
+        <span className="bubble bubble-2"></span>
+        <span className="bubble bubble-3"></span>
+        <span className="bubble bubble-4"></span>
+        <span className="bubble bubble-5"></span>
+        <span className="bubble bubble-6"></span>
+      </div>
+
       <motion.div
         className="centered hero"
         initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
@@ -195,11 +195,21 @@ function App() {
             Projects
           </motion.button>
 
-          <motion.button className="my-button" variants={buttonItem} onClick={() => openLink('https://github.com/spiderpilo')}>
+          <motion.button
+            className="my-button"
+            variants={buttonItem}
+            onClick={() => openLink('https://github.com/spiderpilo')}
+          >
+            <FaGithub size={18} />
             GitHub
           </motion.button>
 
-          <motion.button className="my-button" variants={buttonItem} onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}>
+          <motion.button
+            className="my-button"
+            variants={buttonItem}
+            onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}
+          >
+            <FaLinkedin size={18} />
             LinkedIn
           </motion.button>
 
@@ -209,7 +219,6 @@ function App() {
         </motion.div>
       </motion.div>
 
-      {/* ABOUT */}
       <section id="about" className="section about-section">
         <motion.img
           src={profilePic}
@@ -239,7 +248,6 @@ function App() {
         </p>
       </section>
 
-      {/* PROJECTS */}
       <section id="projects" className="section projects-section">
         <h2>Projects</h2>
 
@@ -296,7 +304,6 @@ function App() {
         </div>
       </section>
 
-      {/* CONTACT */}
       <section id="contact" className="section contact-section">
         <h2>Contact Me</h2>
         <p>
