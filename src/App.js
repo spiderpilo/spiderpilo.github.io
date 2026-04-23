@@ -8,6 +8,7 @@ import groceryPic from './Assets/GroceryListAI.png';
 import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
 import cafeFinderPic from './Assets/CafeFinder.png';
 import mirrorTalePic from './Assets/MirrorTale.png';
+import fateDeckPic from './Assets/FateDeck.png';
 
 const buttonsContainer = {
   hidden: { opacity: 0 },
@@ -74,6 +75,21 @@ function App() {
 
   const projects = useMemo(
     () => [
+      {
+        title: 'FateDeck',
+        image: fateDeckPic,
+        alt: 'FateDeck',
+        tech: ['React', 'Node.js', 'OpenAI API'],
+        description:
+          'A playful AI-powered tarot experience that turns user questions into dynamic 3-card readings, combining storytelling, personality, and interactive design.',
+        highlights: [
+          'Generates 3-card spreads with contextual AI interpretations',
+          'Interactive UI with card animations and user-driven questions',
+          'Built at a hackathon for entertainment, creativity, and fun UX',
+        ],
+        liveUrl: 'https://fate-deck.vercel.app',
+        githubUrl: 'https://github.com/spiderpilo/fateDeck',
+      },
       {
         title: 'MirrorTale',
         image: mirrorTalePic,
