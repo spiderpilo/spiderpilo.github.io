@@ -258,32 +258,41 @@ function App() {
       </motion.div>
 
       <section id="about" className="section about-section">
-        <motion.img
-          src={profilePic}
-          alt="Piolo"
-          className="profile-photo"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-        />
+        <motion.div
+          className="about-card"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          whileHover={{ y: -6 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.img
+            src={profilePic}
+            alt="Piolo"
+            className="profile-photo"
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            viewport={{ once: true }}
+          />
 
-        <h2>About Me</h2>
+          <h2>About Me</h2>
 
-        <p>
-          Hi, I’m <b>Piolo</b> — a Computer Science student based in California who enjoys building clean,
-          thoughtful, and well-designed software.
-        </p>
+          <p>
+            Hi, I’m <b>Piolo</b> — a Computer Science student based in California who enjoys building clean,
+            thoughtful, and well-designed software.
+          </p>
 
-        <p>
-          I focus on full-stack applications and AI-assisted tools, with an emphasis on usability and
-          human-centered design.
-        </p>
+          <p>
+            I focus on full-stack applications and AI-assisted tools, with an emphasis on usability and
+            human-centered design.
+          </p>
 
-        <p>
-          Outside of coding, I’m usually sketching UI ideas, refining personal projects, or learning
-          something new.
-        </p>
+          <p>
+            Outside of coding, I’m usually sketching UI ideas, refining personal projects, or learning
+            something new.
+          </p>
+        </motion.div>
       </section>
 
       <section id="projects" className="section projects-section">
