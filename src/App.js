@@ -1,6 +1,6 @@
 import './App.css';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
@@ -72,6 +72,25 @@ function App() {
   }, []);
 
   const name = 'piolo';
+
+  const bubbleRefs = useRef([]);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      bubbleRefs.current.forEach((el) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+        const maxDist = 320;
+        const extra = dist < maxDist ? (1 - dist / maxDist) * 0.55 : 0;
+        el.style.setProperty('--hover-scale', 1 + extra);
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const pcbDesigns = useMemo(
     () => [
@@ -177,12 +196,12 @@ function App() {
   return (
     <div className="page-wrapper">
       <div className="background-bubbles">
-        <span className="bubble bubble-1"></span>
-        <span className="bubble bubble-2"></span>
-        <span className="bubble bubble-3"></span>
-        <span className="bubble bubble-4"></span>
-        <span className="bubble bubble-5"></span>
-        <span className="bubble bubble-6"></span>
+        <span className="bubble bubble-1" ref={el => bubbleRefs.current[0] = el}></span>
+        <span className="bubble bubble-2" ref={el => bubbleRefs.current[1] = el}></span>
+        <span className="bubble bubble-3" ref={el => bubbleRefs.current[2] = el}></span>
+        <span className="bubble bubble-4" ref={el => bubbleRefs.current[3] = el}></span>
+        <span className="bubble bubble-5" ref={el => bubbleRefs.current[4] = el}></span>
+        <span className="bubble bubble-6" ref={el => bubbleRefs.current[5] = el}></span>
       </div>
 
       <motion.div
@@ -212,12 +231,7 @@ function App() {
           </motion.span>
         </h1>
 
-        <p>I code sometimes...</p>
-
-        <p>
-          I am a <b>Computer Science student</b> at CSULB with a huge interest in full stack development,
-          AI, and — most of all — <b>beautiful user experience</b>.
-        </p>
+        <p className="hero-sub">I code sometimes...</p>
 
         <motion.div
           className="button-row"
@@ -225,17 +239,19 @@ function App() {
           initial={shouldReduceMotion ? false : 'hidden'}
           animate={shouldReduceMotion ? undefined : 'visible'}
         >
-          <motion.button className="my-button" variants={buttonItem} onClick={() => scrollToCentered('about')}>
+          <motion.button className="my-button" variants={buttonItem} whileHover={shouldReduceMotion ? undefined : { scale: 1.12, y: -4 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }} onClick={() => scrollToCentered('about')}>
             About
           </motion.button>
 
-          <motion.button className="my-button" variants={buttonItem} onClick={() => scrollToTop('projects')}>
+          <motion.button className="my-button" variants={buttonItem} whileHover={shouldReduceMotion ? undefined : { scale: 1.12, y: -4 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }} onClick={() => scrollToTop('projects')}>
             Projects
           </motion.button>
 
           <motion.button
             className="my-button"
             variants={buttonItem}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.12, y: -4 }}
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}
             onClick={() => openLink('https://github.com/spiderpilo')}
           >
             <FaGithub size={18} />
@@ -245,13 +261,15 @@ function App() {
           <motion.button
             className="my-button"
             variants={buttonItem}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.12, y: -4 }}
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}
             onClick={() => openLink('https://www.linkedin.com/in/piolo-patag-5a0b7735b/')}
           >
             <FaLinkedin size={18} />
             LinkedIn
           </motion.button>
 
-          <motion.button className="my-button" variants={buttonItem} onClick={() => scrollToCentered('contact')}>
+          <motion.button className="my-button" variants={buttonItem} whileHover={shouldReduceMotion ? undefined : { scale: 1.12, y: -4 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }} onClick={() => scrollToCentered('contact')}>
             Contact
           </motion.button>
         </motion.div>
