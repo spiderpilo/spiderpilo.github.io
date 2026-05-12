@@ -278,19 +278,26 @@ function App() {
 
           <h2>About Me</h2>
 
+          <p>Hi, I&apos;m <b>Piolo</b>.</p>
+
           <p>
-            Hi, I’m <b>Piolo</b> — a Computer Science student based in California who enjoys building clean,
-            thoughtful, and well-designed software.
+            I&apos;m a Computer Science student and builder focused on AI, robotics, and embedded systems.
           </p>
 
           <p>
-            I focus on full-stack applications and AI-assisted tools, with an emphasis on usability and
-            human-centered design.
+            I enjoy creating projects that combine software, hardware, and real-world interaction — from
+            AI-powered applications and computer vision systems to autonomous drones, PCB prototypes, and
+            experimental robotics projects.
           </p>
 
           <p>
-            Outside of coding, I’m usually sketching UI ideas, refining personal projects, or learning
-            something new.
+            My goal is to work at the intersection of machine learning and physical systems while
+            continuously learning through hands-on building and iteration.
+          </p>
+
+          <p>
+            When I&apos;m not coding, I&apos;m usually prototyping ideas, refining projects, testing
+            hardware, or documenting the process online.
           </p>
         </motion.div>
       </section>
