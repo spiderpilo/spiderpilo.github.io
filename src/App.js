@@ -73,6 +73,28 @@ function App() {
 
   const name = 'piolo';
 
+  const pcbDesigns = useMemo(
+    () => [
+      {
+        title: 'LED_Arduino',
+        tech: ['KiCad', 'Arduino', 'PCB Design', 'Eagle'],
+        description:
+          'A custom PCB designed to drive LEDs using an Arduino microcontroller — laying out the schematic, routing traces, and exporting fabrication-ready Gerber files.',
+        highlights: [
+          'Custom schematic and trace routing for LED control circuits',
+          'Designed 3D model preview to verify component clearances',
+          'Export-ready layout for PCB fabrication',
+        ],
+        images: [
+          { src: `${process.env.PUBLIC_URL}/3DModel.png`, label: '3D Model' },
+          { src: `${process.env.PUBLIC_URL}/PCB_layout.png`, label: 'PCB Layout' },
+        ],
+        githubUrl: 'https://github.com/spiderpilo/LED_Arduino_PCB',
+      },
+    ],
+    []
+  );
+
   const projects = useMemo(
     () => [
       {
@@ -317,6 +339,54 @@ function App() {
               </motion.article>
             );
           })}
+        </div>
+      </section>
+
+      <section id="pcb-designs" className="section pcb-section">
+        <h2>PCB Designs</h2>
+
+        <div className="pcb-list">
+          {pcbDesigns.map((p) => (
+            <motion.article key={p.title} className="project-card pcb-card" {...projectCardMotion}>
+              <div className="pcb-image-gallery">
+                {p.images.map((img) => (
+                  <div key={img.label} className="pcb-image-item">
+                    <div className="project-image-wrap">
+                      <img src={img.src} alt={img.label} className="project-image" loading="lazy" />
+                    </div>
+                    <span className="pcb-image-label">{img.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="project-content">
+                <h3 className="project-title">{p.title}</h3>
+
+                <div className="tech-row">
+                  {p.tech.map((t) => (
+                    <span key={t} className="tech-chip">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="project-description">{p.description}</p>
+
+                <ul className="project-highlights">
+                  {p.highlights.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+
+                <div className="project-actions">
+                  <button className="my-button project-button" onClick={() => openLink(p.githubUrl)}>
+                    <FaGithub size={16} />
+                    View GitHub
+                  </button>
+                </div>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </section>
 

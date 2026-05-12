@@ -462,6 +462,54 @@ h2 {
   transform: translateY(-2px) scale(1.04);
 }
 
+/* PCB DESIGNS */
+.pcb-section {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.pcb-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  margin-top: 24px;
+}
+
+.pcb-card {
+  width: 100%;
+  max-width: 700px;
+}
+
+.pcb-image-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.pcb-image-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pcb-image-label {
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 500px) {
+  .pcb-image-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* CONTACT */
 .contact-section {
   width: min(100%, 900px);
