@@ -231,7 +231,7 @@ function App() {
           </motion.span>
         </h1>
 
-        <p className="hero-sub">I code sometimes...</p>
+        <p className="hero-sub">I build stuff...</p>
 
         <motion.div
           className="button-row"

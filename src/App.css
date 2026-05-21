@@ -310,16 +310,6 @@ h2 {
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-@media (max-width: 640px) {
-  .about-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
-
-  .about-card {
-    padding: 32px 24px;
-  }
-}
 
 .profile-photo {
   width: 180px;
@@ -537,11 +527,6 @@ h2 {
   letter-spacing: 0.03em;
 }
 
-@media (max-width: 500px) {
-  .pcb-image-gallery {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* CONTACT */
 .contact-section {
@@ -587,21 +572,61 @@ h2 {
 }
 
 @media (max-width: 640px) {
+  h1 {
+    font-size: 2.0rem;
+  }
+
   .bold-name {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
+  }
+
+  .projects-section h2,
+  .pcb-section h2 {
+    font-size: 1.9rem;
+  }
+
+  .centered.hero {
+    padding: 30px 16px;
+  }
+
+  .hero-sub {
+    margin-bottom: 16px;
+  }
+
+  .button-row {
+    gap: 12px;
+    margin-top: 18px;
+    padding: 6px 8px;
   }
 
   .my-button {
-    padding: 12px 26px;
+    padding: 11px 20px;
+    font-size: 14px;
   }
-
 
   .section {
-    padding: 84px 16px;
+    padding: 56px 16px;
   }
 
-  body::after {
-    background-size: 64px 64px;
+  .about-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .about-card {
+    padding: 28px 20px;
+  }
+
+  .profile-photo {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 20px;
+  }
+
+  .projects-section,
+  .pcb-section {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .project-title {
@@ -620,30 +645,38 @@ h2 {
     white-space: normal;
   }
 
-  .bubble {
-    filter: blur(65px);
-    opacity: 0.2;
+  .pcb-image-gallery {
+    grid-template-columns: 1fr;
   }
+
+  .bubble {
+    filter: blur(80px);
+    opacity: 0.18;
+  }
+
+  .bubble-1 { width: 200px; height: 200px; }
+  .bubble-2 { width: 240px; height: 240px; }
+  .bubble-3 { width: 180px; height: 180px; }
+  .bubble-4 { width: 220px; height: 220px; }
+  .bubble-5 { width: 140px; height: 140px; }
+  .bubble-6 { width: 160px; height: 160px; }
 }
 
-.project-image {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  object-position: center;
-  margin: auto;
-  filter: contrast(1.04) brightness(1.04);
-}
+@media (max-width: 420px) {
+  h1 {
+    font-size: 1.7rem;
+  }
 
-.profile-photo {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  margin: 0 auto 28px;
+  .bold-name {
+    font-size: 2.1rem;
+  }
+
+  .my-button {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .button-row {
+    gap: 10px;
+  }
 }
