@@ -263,14 +263,54 @@ h2 {
   text-shadow: 0 0 18px rgba(143, 211, 255, 0.1);
 }
 
-.projects-section h2,
+.software-section h2,
+.robotics-section h2,
 .pcb-section h2 {
   font-size: 2.4rem;
   font-weight: 800;
   letter-spacing: -0.01em;
+  margin-bottom: 0;
   text-shadow:
     0 0 20px rgba(143, 211, 255, 0.35),
     0 0 48px rgba(143, 211, 255, 0.15);
+}
+
+/* SECTION INTRO */
+.section-intro {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.section-intro-accent {
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(143, 211, 255, 0.25));
+  border-radius: 2px;
+  margin: 0 auto 20px;
+  transform-origin: left center;
+  opacity: 0.65;
+}
+
+.section-intro-sub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.36);
+  letter-spacing: 0.03em;
+  margin: 8px auto 0;
+  max-width: 400px;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .section-intro {
+    margin-bottom: 36px;
+  }
+
+  .software-section h2,
+  .robotics-section h2,
+  .pcb-section h2 {
+    font-size: 1.9rem;
+  }
 }
 
 /* ABOUT */
@@ -325,12 +365,29 @@ h2 {
 }
 
 /* PROJECTS */
-.projects-section {
+.software-section,
+.robotics-section {
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
   padding-left: 28px;
   padding-right: 28px;
+}
+
+.empty-state {
+  margin-top: 24px;
+  padding: 48px 32px;
+  border-radius: 22px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  text-align: center;
+}
+
+.empty-state-text {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  margin: 0;
 }
 
 .projects-list {
@@ -485,6 +542,361 @@ h2 {
   transform: translateY(-2px) scale(1.04);
 }
 
+.icon-btn {
+  width: auto;
+  padding: 10px 16px;
+}
+
+/* DRONE FEATURED CARD */
+.drone-card {
+  width: 100%;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(143, 211, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  margin-top: 32px;
+  box-shadow:
+    0 0 60px rgba(143, 211, 255, 0.05),
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.drone-card:hover {
+  border-color: rgba(143, 211, 255, 0.24);
+  box-shadow:
+    0 0 90px rgba(143, 211, 255, 0.09),
+    0 24px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Banner */
+.drone-banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  background: #07080f;
+}
+
+.drone-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: brightness(0.75) contrast(1.08) saturate(0.9);
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.7s ease;
+}
+
+.drone-card:hover .drone-banner-img {
+  transform: scale(1.03);
+  filter: brightness(0.82) contrast(1.08) saturate(0.95);
+}
+
+.drone-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 6, 15, 0.15) 0%,
+    rgba(6, 6, 15, 0.08) 35%,
+    rgba(6, 6, 15, 0.65) 85%,
+    rgba(6, 6, 15, 0.85) 100%
+  );
+  pointer-events: none;
+}
+
+.drone-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(143, 211, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143, 211, 255, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+.drone-reticle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.drone-reticle::before,
+.drone-reticle::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+}
+
+.drone-reticle::before {
+  top: 18px;
+  left: 18px;
+  border-top: 1.5px solid rgba(143, 211, 255, 0.5);
+  border-left: 1.5px solid rgba(143, 211, 255, 0.5);
+}
+
+.drone-reticle::after {
+  bottom: 18px;
+  right: 18px;
+  border-bottom: 1.5px solid rgba(143, 211, 255, 0.5);
+  border-right: 1.5px solid rgba(143, 211, 255, 0.5);
+}
+
+.drone-status-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(6, 6, 15, 0.72);
+  border: 1px solid rgba(143, 211, 255, 0.28);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+  animation: statusPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+  50%       { opacity: 0.75; box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
+}
+
+/* Drone content */
+.drone-content {
+  padding: 36px 40px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.drone-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.drone-description {
+  margin-bottom: 28px;
+  max-width: 760px;
+  text-align: left;
+}
+
+.drone-description p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.93rem;
+  line-height: 1.7;
+  margin: 0 0 12px;
+  max-width: 100%;
+}
+
+.drone-description p:last-child {
+  margin-bottom: 0;
+}
+
+.drone-section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+  margin: 0 0 12px;
+}
+
+.drone-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+  justify-content: center;
+  max-width: 720px;
+}
+
+.drone-chip {
+  display: inline-block;
+  font-size: 0.76rem;
+  padding: 5px 11px;
+  border-radius: 7px;
+  border: 1px solid rgba(143, 211, 255, 0.18);
+  background: rgba(143, 211, 255, 0.05);
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.02em;
+  cursor: default;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.drone-chip:hover {
+  border-color: rgba(143, 211, 255, 0.38);
+  background: rgba(143, 211, 255, 0.1);
+  box-shadow: 0 0 14px rgba(143, 211, 255, 0.1);
+}
+
+.drone-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+/* Dev log */
+.drone-log {
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.drone-log-inner {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.drone-log-entry {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.drone-log-entry p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.87rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 100%;
+}
+
+.log-tag {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.65;
+  border: 1px solid rgba(143, 211, 255, 0.2);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+/* Gallery */
+.drone-gallery {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 24px;
+  width: 100%;
+}
+
+.drone-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.drone-gallery-tile {
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.015);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.14);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .drone-content {
+    padding: 28px 24px 32px;
+  }
+
+  .drone-title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .drone-banner {
+    aspect-ratio: 16 / 9;
+  }
+
+  .drone-content {
+    padding: 22px 18px 26px;
+  }
+
+  .drone-title {
+    font-size: 1.2rem;
+  }
+
+  .drone-description {
+    text-align: left;
+  }
+
+  .drone-description p {
+    font-size: 0.87rem;
+  }
+
+  .drone-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .drone-chip-grid {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .drone-banner {
+    aspect-ratio: 4 / 3;
+  }
+
+  .drone-title {
+    font-size: 1.1rem;
+  }
+
+  .drone-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* PCB DESIGNS */
 .pcb-section {
   width: 100%;
@@ -560,7 +972,7 @@ h2 {
     row-gap: 32px;
   }
 
-  .projects-section {
+  .software-section {
     width: min(100%, 950px);
     padding-left: 20px;
     padding-right: 20px;
@@ -578,11 +990,6 @@ h2 {
 
   .bold-name {
     font-size: 2.6rem;
-  }
-
-  .projects-section h2,
-  .pcb-section h2 {
-    font-size: 1.9rem;
   }
 
   .centered.hero {
@@ -623,7 +1030,8 @@ h2 {
     margin-bottom: 20px;
   }
 
-  .projects-section,
+  .software-section,
+  .robotics-section,
   .pcb-section {
     padding-left: 16px;
     padding-right: 16px;

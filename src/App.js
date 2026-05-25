@@ -1,7 +1,7 @@
 import './App.css';
-import { motion, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FaGithub, FaLinkedin, FaExternalLinkAlt } from 'react-icons/fa';
 
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
@@ -9,6 +9,8 @@ import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
 import cafeFinderPic from './Assets/CafeFinder.png';
 import mirrorTalePic from './Assets/MirrorTale.png';
 import fateDeckPic from './Assets/FateDeck.png';
+import dronePic from './Assets/Drone1.png';
+import pcb1Video from './Assets/PCB1.mp4';
 
 const buttonsContainer = {
   hidden: { opacity: 0 },
@@ -44,11 +46,18 @@ const nameLetter = {
 };
 
 const projectCardMotion = {
-  initial: { opacity: 0, y: 60 },
+  initial: { opacity: 0, y: 56 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 1.1, ease: 'easeOut', delay: 0.1 },
-  viewport: { once: true, amount: 0.35 },
+  transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0 },
+  viewport: { once: true, amount: 0.2 },
 };
+
+const sectionIntroMotion = (delay = 0) => ({
+  initial: { opacity: 0, y: 36, filter: 'blur(6px)' },
+  whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1], delay },
+  viewport: { once: true, amount: 0.6 },
+});
 
 function App() {
   const shouldReduceMotion = useReducedMotion();
@@ -92,6 +101,15 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const [showDevLog, setShowDevLog] = useState(false);
+
+  const droneTags = [
+    'Raspberry Pi', 'Pixhawk', 'ArduPilot', 'MAVLink', 'Python', 'OpenCV',
+    'YOLO', 'Embedded Systems', 'Robotics', 'Computer Vision', 'AI/ML',
+    'UAV Systems', 'Telemetry', 'Linux', 'TensorFlow', 'Edge AI',
+    'Sensor Integration', 'Hardware Prototyping', 'Autonomous Systems',
+  ];
+
   const pcbDesigns = useMemo(
     () => [
       {
@@ -105,8 +123,8 @@ function App() {
           'Export-ready layout for PCB fabrication',
         ],
         images: [
-          { src: `${process.env.PUBLIC_URL}/3DModel.png`, label: '3D Model' },
-          { src: `${process.env.PUBLIC_URL}/PCB_layout.png`, label: 'PCB Layout' },
+          { src: pcb1Video, label: 'PCB Overview', type: 'video' },
+          { src: `${process.env.PUBLIC_URL}/PCB_layout.png`, label: 'PCB Layout', type: 'image' },
         ],
         githubUrl: 'https://github.com/spiderpilo/LED_Arduino_PCB',
       },
@@ -243,7 +261,7 @@ function App() {
             About
           </motion.button>
 
-          <motion.button className="my-button" variants={buttonItem} whileHover={shouldReduceMotion ? undefined : { scale: 1.12, y: -4 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }} onClick={() => scrollToTop('projects')}>
+          <motion.button className="my-button" variants={buttonItem} whileHover={shouldReduceMotion ? undefined : { scale: 1.12, y: -4 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }} onClick={() => scrollToTop('robotics')}>
             Projects
           </motion.button>
 
@@ -320,18 +338,136 @@ function App() {
         </motion.div>
       </section>
 
-      <section id="projects" className="section projects-section">
-        <h2>Projects</h2>
+      <section id="robotics" className="section robotics-section">
+        <div className="section-intro">
+          <motion.span className="section-intro-accent" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true, amount: 0.8 }} />
+          <motion.h2 {...sectionIntroMotion(0.1)}>Robotics</motion.h2>
+          <motion.p className="section-intro-sub" {...sectionIntroMotion(0.22)}>
+            Autonomous UAVs, embedded systems, and physical AI.
+          </motion.p>
+        </div>
+
+        <motion.article
+          className="drone-card"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.12 }}
+        >
+          {/* Banner */}
+          <div className="drone-banner">
+            <img src={dronePic} alt="AI Vision Drone" className="drone-banner-img" loading="lazy" />
+            <div className="drone-banner-overlay" />
+            <div className="drone-grid-overlay" />
+            <div className="drone-reticle" />
+            <span className="drone-status-badge">
+              <span className="status-dot" />
+              In Active Development
+            </span>
+          </div>
+
+          {/* Content */}
+          <div className="drone-content">
+            <h3 className="drone-title">AI Vision Drone / Autonomous UAV Platform</h3>
+
+            <div className="drone-description">
+              <p>
+                An ongoing autonomous UAV project focused on combining AI, robotics, and embedded systems
+                into a custom-built aerial platform. The system integrates a Raspberry Pi companion
+                computer, Pixhawk flight controller, computer vision pipelines, and real-time telemetry
+                to explore physical AI applications such as subject tracking, autonomous assistance, and
+                environmental awareness.
+              </p>
+              <p>
+                The project involves both hardware and software engineering, including drone assembly,
+                power distribution, sensor integration, embedded programming, computer vision
+                experimentation, and AI-assisted navigation workflows. Current development includes
+                integrating person detection using OpenCV and YOLO models on a Raspberry Pi while
+                communicating with the flight controller through MAVLink telemetry systems.
+              </p>
+              <p>
+                This project is being developed incrementally as a long-term engineering and research
+                platform to deepen my understanding of autonomous systems, edge AI, robotics, and
+                intelligent human-machine interaction.
+              </p>
+            </div>
+
+            <p className="drone-section-label">Skills &amp; Technologies</p>
+            <div className="drone-chip-grid">
+              {droneTags.map((tag) => (
+                <motion.span
+                  key={tag}
+                  className="drone-chip"
+                  whileHover={shouldReduceMotion ? undefined : { scale: 1.06, y: -2 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {tag}
+                </motion.span>
+              ))}
+            </div>
+
+            <div className="drone-actions">
+              <button className="my-button project-button icon-btn" onClick={() => openLink('https://github.com/spiderpilo/Drone_AI_UAV')}>
+                <FaGithub size={18} />
+              </button>
+              <button
+                className="my-button project-button"
+                onClick={() => setShowDevLog((v) => !v)}
+              >
+                {showDevLog ? 'Hide Dev Log' : 'Development Log'}
+              </button>
+            </div>
+
+            <AnimatePresence>
+              {showDevLog && (
+                <motion.div
+                  className="drone-log"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                >
+                  <div className="drone-log-inner">
+                    <div className="drone-log-entry">
+                      <span className="log-tag">Active</span>
+                      <p>
+                        Integrating person detection using OpenCV and YOLO on a Raspberry Pi.
+                        Establishing MAVLink communication layer between the companion computer and
+                        Pixhawk flight controller for telemetry feedback and command relay.
+                      </p>
+                    </div>
+                    <div className="drone-log-entry">
+                      <span className="log-tag">Upcoming</span>
+                      <p>
+                        Full technical writeups, testing logs, and build documentation will be
+                        published here as development progresses. Videos and annotated build
+                        photos coming soon.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+          </div>
+        </motion.article>
+      </section>
+
+      <section id="software" className="section software-section">
+        <div className="section-intro">
+          <motion.span className="section-intro-accent" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true, amount: 0.8 }} />
+          <motion.h2 {...sectionIntroMotion(0.1)}>Software</motion.h2>
+          <motion.p className="section-intro-sub" {...sectionIntroMotion(0.22)}>
+            Web apps, AI tools, and interactive experiences.
+          </motion.p>
+        </div>
 
         <div className="projects-list">
           {projects.map((p, index) => {
-            const motionProps =
-              index === 0
-                ? projectCardMotion
-                : {
-                    ...projectCardMotion,
-                    transition: { ...projectCardMotion.transition, delay: 0.2 },
-                  };
+            const motionProps = {
+              ...projectCardMotion,
+              transition: { ...projectCardMotion.transition, delay: index * 0.13 },
+            };
 
             return (
               <motion.article key={p.title} className="project-card" {...motionProps}>
@@ -360,13 +496,13 @@ function App() {
 
                   <div className="project-actions">
                     {p.liveUrl && (
-                      <button className="my-button project-button" onClick={() => openLink(p.liveUrl)}>
-                        Visit Website
+                      <button className="my-button project-button icon-btn" onClick={() => openLink(p.liveUrl)}>
+                        <FaExternalLinkAlt size={16} />
                       </button>
                     )}
 
-                    <button className="my-button project-button" onClick={() => openLink(p.githubUrl)}>
-                      View GitHub
+                    <button className="my-button project-button icon-btn" onClick={() => openLink(p.githubUrl)}>
+                      <FaGithub size={18} />
                     </button>
                   </div>
                 </div>
@@ -377,7 +513,13 @@ function App() {
       </section>
 
       <section id="pcb-designs" className="section pcb-section">
-        <h2>PCB Designs</h2>
+        <div className="section-intro">
+          <motion.span className="section-intro-accent" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true, amount: 0.8 }} />
+          <motion.h2 {...sectionIntroMotion(0.1)}>PCB Designs</motion.h2>
+          <motion.p className="section-intro-sub" {...sectionIntroMotion(0.22)}>
+            Custom circuits, hardware prototyping, and embedded electronics.
+          </motion.p>
+        </div>
 
         <div className="pcb-list">
           {pcbDesigns.map((p) => (
@@ -386,7 +528,13 @@ function App() {
                 {p.images.map((img) => (
                   <div key={img.label} className="pcb-image-item">
                     <div className="project-image-wrap">
-                      <img src={img.src} alt={img.label} className="project-image" loading="lazy" />
+                      {img.type === 'video' ? (
+                        <video className="project-image" autoPlay muted loop playsInline>
+                          <source src={img.src} type="video/mp4" />
+                        </video>
+                      ) : (
+                        <img src={img.src} alt={img.label} className="project-image" loading="lazy" />
+                      )}
                     </div>
                     <span className="pcb-image-label">{img.label}</span>
                   </div>
@@ -413,9 +561,8 @@ function App() {
                 </ul>
 
                 <div className="project-actions">
-                  <button className="my-button project-button" onClick={() => openLink(p.githubUrl)}>
-                    <FaGithub size={16} />
-                    View GitHub
+                  <button className="my-button project-button icon-btn" onClick={() => openLink(p.githubUrl)}>
+                    <FaGithub size={18} />
                   </button>
                 </div>
               </div>
