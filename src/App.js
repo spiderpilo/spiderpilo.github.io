@@ -11,6 +11,7 @@ import mirrorTalePic from './Assets/MirrorTale.png';
 import fateDeckPic from './Assets/FateDeck.png';
 import fatedeckVideo from './Assets/fatedeck.mp4';
 import mirrortaleVideo from './Assets/mirrortale.mp4';
+import assistiveVideo from './Assets/assistivecompanion.mp4';
 import dronePic from './Assets/Drone1.png';
 import pcb1Video from './Assets/PCB1.mp4';
 
@@ -171,6 +172,7 @@ function App() {
       {
         title: 'Assistive Social Cue Companion',
         image: socialCuePic,
+        video: assistiveVideo,
         alt: 'Assistive Social Cue Companion',
         tech: ['React', 'JavaScript', 'Webcam', 'TensorFlow.js'],
         description:
