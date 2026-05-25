@@ -9,6 +9,8 @@ import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
 import cafeFinderPic from './Assets/CafeFinder.png';
 import mirrorTalePic from './Assets/MirrorTale.png';
 import fateDeckPic from './Assets/FateDeck.png';
+import fatedeckVideo from './Assets/fatedeck.mp4';
+import mirrortaleVideo from './Assets/mirrortale.mp4';
 import dronePic from './Assets/Drone1.png';
 import pcb1Video from './Assets/PCB1.mp4';
 
@@ -137,6 +139,7 @@ function App() {
       {
         title: 'FateDeck',
         image: fateDeckPic,
+        video: fatedeckVideo,
         alt: 'FateDeck',
         tech: ['React', 'Node.js', 'OpenAI API'],
         description:
@@ -152,6 +155,7 @@ function App() {
       {
         title: 'MirrorTale',
         image: mirrorTalePic,
+        video: mirrortaleVideo,
         alt: 'MirrorTale',
         tech: ['React', 'Node.js', 'Express', 'OpenAI API'],
         description:
@@ -472,7 +476,13 @@ function App() {
             return (
               <motion.article key={p.title} className="project-card" {...motionProps}>
                 <div className="project-image-wrap">
-                  <img src={p.image} alt={p.alt} className="project-image" loading="lazy" />
+                  {p.video ? (
+                    <video className="project-image" autoPlay muted loop playsInline>
+                      <source src={p.video} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <img src={p.image} alt={p.alt} className="project-image" loading="lazy" />
+                  )}
                 </div>
 
                 <div className="project-content">
