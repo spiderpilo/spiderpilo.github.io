@@ -138,6 +138,21 @@ function App() {
   const projects = useMemo(
     () => [
       {
+        title: 'Assistive Social Cue Companion',
+        image: socialCuePic,
+        video: assistiveVideo,
+        alt: 'Assistive Social Cue Companion',
+        tech: ['React', 'JavaScript', 'Webcam', 'TensorFlow.js'],
+        description:
+          'An assistive AI tool designed to support neurodivergent users in social situations by providing real-time context around facial expressions and tone.',
+        highlights: [
+          'Real-time emotion detection using webcam input',
+          'Sarcasm likelihood feedback powered by AI',
+          'Designed with a user-centered, non-diagnostic approach',
+        ],
+        githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion',
+      },
+      {
         title: 'FateDeck',
         image: fateDeckPic,
         video: fatedeckVideo,
@@ -168,21 +183,6 @@ function App() {
         ],
         liveUrl: 'https://www.mirrorttale.org/',
         githubUrl: 'https://github.com/spiderpilo/MirrorTale',
-      },
-      {
-        title: 'Assistive Social Cue Companion',
-        image: socialCuePic,
-        video: assistiveVideo,
-        alt: 'Assistive Social Cue Companion',
-        tech: ['React', 'JavaScript', 'Webcam', 'TensorFlow.js'],
-        description:
-          'An assistive AI tool designed to support neurodivergent users in social situations by providing real-time context around facial expressions and tone.',
-        highlights: [
-          'Real-time emotion detection using webcam input',
-          'Sarcasm likelihood feedback powered by AI',
-          'Designed with a user-centered, non-diagnostic approach',
-        ],
-        githubUrl: 'https://github.com/spiderpilo/Assistive-Social-Cue-Companion',
       },
       {
         title: 'AI-Powered Grocery List Assistant',
