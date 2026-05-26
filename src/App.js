@@ -88,8 +88,8 @@ function App() {
   const name = 'piolo';
 
 
+  const [videoPlaying, setVideoPlaying] = useState(true);
   const [introGone, setIntroGone] = useState(false);
-  const [videoPlaying, setVideoPlaying] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
 
   useEffect(() => {
@@ -214,19 +214,20 @@ function App() {
 
   return (
     <>
-      <AnimatePresence onExitComplete={() => setVideoPlaying(true)}>
-        {!introGone && (
+      <AnimatePresence onExitComplete={() => setIntroComplete(true)}>
+        {!videoPlaying && !introGone && (
           <motion.div
             className="intro-overlay"
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.55, ease: 'easeInOut' }}
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
           >
             <div className="intro-bubble-float">
               <motion.button
                 className="intro-bubble"
-                initial={{ scale: 0.75, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1, transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1, transition: { type: 'spring', stiffness: 150, damping: 13, delay: 0.35 } }}
                 exit={{ scale: 18, opacity: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }}
                 whileHover={{ scale: 1.12, y: -8 }}
                 whileTap={{ scale: 0.91 }}
@@ -244,25 +245,24 @@ function App() {
       </AnimatePresence>
 
       <AnimatePresence>
-        {videoPlaying && !introComplete && (
+        {videoPlaying && (
           <motion.div
             className="dragon-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
             <video
               className="dragon-video"
               autoPlay
               playsInline
-              onEnded={() => { setVideoPlaying(false); setIntroComplete(true); }}
+              onEnded={() => setVideoPlaying(false)}
             >
               <source src={`${process.env.PUBLIC_URL}/dragon.mp4`} type="video/mp4" />
             </video>
             <button
               className="dragon-skip"
-              onClick={() => { setVideoPlaying(false); setIntroComplete(true); }}
+              onClick={() => setVideoPlaying(false)}
             >
               skip
             </button>
