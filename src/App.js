@@ -252,20 +252,11 @@ function App() {
                 <img src={pioloIcon} alt="piolo" className="intro-icon" />
               </motion.button>
             </div>
-            <motion.p
-              className="intro-hint"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 1.1, duration: 0.5 }}
-            >
-              click to enter
-            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="page-wrapper">
+      {introComplete && <div className="page-wrapper">
       <div className="background-bubbles">
         <span className="bubble bubble-1" ref={el => bubbleRefs.current[0] = el}></span>
         <span className="bubble bubble-2" ref={el => bubbleRefs.current[1] = el}></span>
@@ -587,7 +578,7 @@ function App() {
           {pcbDesigns.map((p) => (
             <motion.article key={p.title} className={`project-card pcb-card${revealedCards.has(p.title) ? ' card-revealed' : ''}`} {...projectCardMotion} onMouseEnter={() => revealCard(p.title)}>
               <div className="card-mask">
-                <span className="card-mask-letter">p</span>
+                <img src={pioloIcon} alt="" className="card-mask-icon" />
               </div>
               <div className="pcb-image-gallery">
                 {p.images.map((img) => (
@@ -645,7 +636,7 @@ function App() {
           </a>
         </p>
       </section>
-    </div>
+    </div>}
     </>
   );
 }

@@ -503,12 +503,12 @@ h2 {
 }
 
 .card-mask-icon {
-  width: 72px;
-  height: 72px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
   border-radius: 50%;
-  opacity: 0.22;
-  filter: drop-shadow(0 0 24px rgba(143, 211, 255, 0.35));
+  opacity: 0.45;
+  filter: drop-shadow(0 0 32px rgba(143, 211, 255, 0.5)) drop-shadow(0 0 8px rgba(255,255,255,0.15));
   user-select: none;
   pointer-events: none;
   transition:
