@@ -107,17 +107,15 @@ function App() {
   const [showDevLog, setShowDevLog] = useState(false);
 
   const droneTags = [
-    'Raspberry Pi', 'Pixhawk', 'ArduPilot', 'MAVLink', 'Python', 'OpenCV',
-    'YOLO', 'Embedded Systems', 'Robotics', 'Computer Vision', 'AI/ML',
-    'UAV Systems', 'Telemetry', 'Linux', 'TensorFlow', 'Edge AI',
-    'Sensor Integration', 'Hardware Prototyping', 'Autonomous Systems',
+    'Python', 'OpenCV', 'YOLO', 'Raspberry Pi',
+    'Pixhawk', 'ArduPilot', 'MAVLink', 'Linux',
   ];
 
   const pcbDesigns = useMemo(
     () => [
       {
         title: 'LED_Arduino',
-        tech: ['KiCad', 'Arduino', 'PCB Design', 'Eagle'],
+        tech: ['KiCad', 'Eagle', 'Arduino', 'C/C++', 'Embedded C'],
         description:
           'A custom PCB designed to drive LEDs using an Arduino microcontroller — laying out the schematic, routing traces, and exporting fabrication-ready Gerber files.',
         highlights: [
@@ -142,7 +140,7 @@ function App() {
         image: socialCuePic,
         video: assistiveVideo,
         alt: 'Assistive Social Cue Companion',
-        tech: ['React', 'JavaScript', 'Webcam', 'TensorFlow.js'],
+        tech: ['React', 'TensorFlow.js', 'JavaScript'],
         description:
           'An assistive AI tool designed to support neurodivergent users in social situations by providing real-time context around facial expressions and tone.',
         highlights: [
@@ -157,7 +155,7 @@ function App() {
         image: fateDeckPic,
         video: fatedeckVideo,
         alt: 'FateDeck',
-        tech: ['React', 'Node.js', 'OpenAI API'],
+        tech: ['React', 'Node.js', 'OpenAI API', 'JavaScript'],
         description:
           'A playful AI-powered tarot experience that turns user questions into dynamic 3-card readings, combining storytelling, personality, and interactive design.',
         highlights: [
@@ -173,7 +171,7 @@ function App() {
         image: mirrorTalePic,
         video: mirrortaleVideo,
         alt: 'MirrorTale',
-        tech: ['React', 'Node.js', 'Express', 'OpenAI API'],
+        tech: ['React', 'Node.js', 'Express', 'OpenAI API', 'JavaScript'],
         description:
           'An AI-powered reflection companion that transforms your thoughts into a personalized illustrated storybook through guided, Socratic-style conversations.',
         highlights: [
@@ -188,7 +186,7 @@ function App() {
         title: 'AI-Powered Grocery List Assistant',
         image: groceryPic,
         alt: 'AI-Powered Grocery List Assistant',
-        tech: ['React', 'Electron', 'Node.js', 'OpenAI API'],
+        tech: ['React', 'Electron', 'Node.js', 'OpenAI API', 'JavaScript'],
         description:
           'A personalized grocery list app that learns from past lists to suggest items you actually buy together — avoiding generic recommendations.',
         highlights: [
@@ -202,7 +200,7 @@ function App() {
         title: 'Café Finder',
         image: cafeFinderPic,
         alt: 'Café Finder',
-        tech: ['React', 'Vite', 'Node.js', 'Google Maps API'],
+        tech: ['React', 'Vite', 'Node.js', 'Google Maps API', 'JavaScript'],
         description:
           'A fast, clean, location-based café discovery tool that helps you find great coffee nearby — without drowning you in big chains.',
         highlights: [
@@ -398,7 +396,7 @@ function App() {
               </p>
             </div>
 
-            <p className="drone-section-label">Skills &amp; Technologies</p>
+            <p className="drone-section-label">Technologies</p>
             <div className="drone-chip-grid">
               {droneTags.map((tag) => (
                 <motion.span
