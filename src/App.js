@@ -1,6 +1,6 @@
 import './App.css';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FaGithub, FaLinkedin, FaExternalLinkAlt } from 'react-icons/fa';
 
 import pioloIcon from './Assets/piolo.png';
@@ -87,24 +87,6 @@ function App() {
 
   const name = 'piolo';
 
-  const bubbleRefs = useRef([]);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      bubbleRefs.current.forEach((el) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
-        const maxDist = 320;
-        const extra = dist < maxDist ? (1 - dist / maxDist) * 0.55 : 0;
-        el.style.setProperty('--hover-scale', 1 + extra);
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const [introGone, setIntroGone] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
@@ -261,14 +243,6 @@ function App() {
       </AnimatePresence>
 
       {introComplete && <div className="page-wrapper">
-      <div className="background-bubbles">
-        <span className="bubble bubble-1" ref={el => bubbleRefs.current[0] = el}></span>
-        <span className="bubble bubble-2" ref={el => bubbleRefs.current[1] = el}></span>
-        <span className="bubble bubble-3" ref={el => bubbleRefs.current[2] = el}></span>
-        <span className="bubble bubble-4" ref={el => bubbleRefs.current[3] = el}></span>
-        <span className="bubble bubble-5" ref={el => bubbleRefs.current[4] = el}></span>
-        <span className="bubble bubble-6" ref={el => bubbleRefs.current[5] = el}></span>
-      </div>
 
       <motion.div
         className="centered hero"
