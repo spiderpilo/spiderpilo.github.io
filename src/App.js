@@ -261,12 +261,6 @@ function App() {
             >
               <source src={`${process.env.PUBLIC_URL}/dragon.mp4`} type="video/mp4" />
             </video>
-            <button
-              className="dragon-skip"
-              onClick={() => setVideoPlaying(false)}
-            >
-              skip
-            </button>
           </motion.div>
         )}
       </AnimatePresence>
