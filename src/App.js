@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FaGithub, FaLinkedin, FaExternalLinkAlt } from 'react-icons/fa';
 
+import pioloIcon from './Assets/piolo.png';
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
 import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
@@ -104,7 +105,19 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const [introGone, setIntroGone] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = introComplete ? '' : 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [introComplete]);
+
   const [showDevLog, setShowDevLog] = useState(false);
+  const [revealedCards, setRevealedCards] = useState(new Set());
+  const revealCard = useCallback((key) => {
+    setRevealedCards(prev => new Set([...prev, key]));
+  }, []);
 
   const droneTags = [
     'Python', 'OpenCV', 'YOLO', 'Raspberry Pi',
@@ -216,7 +229,43 @@ function App() {
   );
 
   return (
-    <div className="page-wrapper">
+    <>
+      <AnimatePresence onExitComplete={() => setIntroComplete(true)}>
+        {!introGone && (
+          <motion.div
+            className="intro-overlay"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.55, ease: 'easeInOut' }}
+          >
+            <div className="intro-bubble-float">
+              <motion.button
+                className="intro-bubble"
+                initial={{ scale: 0.75, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1, transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } }}
+                exit={{ scale: 18, opacity: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }}
+                whileHover={{ scale: 1.12, y: -8 }}
+                whileTap={{ scale: 0.91 }}
+                onClick={() => setIntroGone(true)}
+                aria-label="Enter"
+              >
+                <img src={pioloIcon} alt="piolo" className="intro-icon" />
+              </motion.button>
+            </div>
+            <motion.p
+              className="intro-hint"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 1.1, duration: 0.5 }}
+            >
+              click to enter
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="page-wrapper">
       <div className="background-bubbles">
         <span className="bubble bubble-1" ref={el => bubbleRefs.current[0] = el}></span>
         <span className="bubble bubble-2" ref={el => bubbleRefs.current[1] = el}></span>
@@ -474,7 +523,10 @@ function App() {
             };
 
             return (
-              <motion.article key={p.title} className="project-card" {...motionProps}>
+              <motion.article key={p.title} className={`project-card${revealedCards.has(p.title) ? ' card-revealed' : ''}`} {...motionProps} onMouseEnter={() => revealCard(p.title)}>
+                <div className="card-mask">
+                  <img src={pioloIcon} alt="" className="card-mask-icon" />
+                </div>
                 <div className="project-image-wrap">
                   {p.video ? (
                     <video className="project-image" autoPlay muted loop playsInline>
@@ -533,7 +585,10 @@ function App() {
 
         <div className="pcb-list">
           {pcbDesigns.map((p) => (
-            <motion.article key={p.title} className="project-card pcb-card" {...projectCardMotion}>
+            <motion.article key={p.title} className={`project-card pcb-card${revealedCards.has(p.title) ? ' card-revealed' : ''}`} {...projectCardMotion} onMouseEnter={() => revealCard(p.title)}>
+              <div className="card-mask">
+                <span className="card-mask-letter">p</span>
+              </div>
               <div className="pcb-image-gallery">
                 {p.images.map((img) => (
                   <div key={img.label} className="pcb-image-item">
@@ -591,6 +646,7 @@ function App() {
         </p>
       </section>
     </div>
+    </>
   );
 }
 
