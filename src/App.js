@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FaGithub, FaLinkedin, FaExternalLinkAlt } from 'react-icons/fa';
 
 import pioloIcon from './Assets/piolo.png';
+import pioloIconWhite from './Assets/piolo_white.png';
 import profilePic from './Assets/6B0C5008-51E3-48A1-BA54-9009B1713076_1_105_c.jpeg';
 import groceryPic from './Assets/GroceryListAI.png';
 import socialCuePic from './Assets/Assistive_Social_Cue_Companion.png';
@@ -249,7 +250,10 @@ function App() {
                 onClick={() => setIntroGone(true)}
                 aria-label="Enter"
               >
-                <img src={pioloIcon} alt="piolo" className="intro-icon" />
+                <div className="intro-icon-wrap">
+                  <img src={pioloIcon} alt="piolo" className="intro-icon" />
+                  <img src={pioloIconWhite} alt="" className="intro-icon-white" />
+                </div>
               </motion.button>
             </div>
           </motion.div>
@@ -339,13 +343,18 @@ function App() {
 
       <section id="about" className="section about-section">
         <motion.div
-          className="about-card"
+          className={`about-card${revealedCards.has('about') ? ' card-revealed' : ''}`}
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           whileHover={{ y: -6 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.3 }}
+          onMouseEnter={() => revealCard('about')}
         >
+          <div className="card-mask">
+            <img src={pioloIcon} alt="" className="card-mask-icon" />
+          </div>
+          <div className="about-card-inner">
           <motion.img
             src={profilePic}
             alt="Piolo"
@@ -379,6 +388,7 @@ function App() {
             When I&apos;m not coding, I&apos;m usually prototyping ideas, refining projects, testing
             hardware, or documenting the process online.
           </p>
+          </div>
         </motion.div>
       </section>
 
@@ -392,12 +402,16 @@ function App() {
         </div>
 
         <motion.article
-          className="drone-card"
+          className={`drone-card${revealedCards.has('drone') ? ' card-revealed' : ''}`}
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.12 }}
+          onMouseEnter={() => revealCard('drone')}
         >
+          <div className="card-mask">
+            <img src={pioloIcon} alt="" className="card-mask-icon" />
+          </div>
           {/* Banner */}
           <div className="drone-banner">
             <img src={dronePic} alt="AI Vision Drone" className="drone-banner-img" loading="lazy" />
