@@ -1,6 +1,6 @@
 import './App.css';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FaGithub, FaLinkedin, FaExternalLinkAlt } from 'react-icons/fa';
 
 import pioloIcon from './Assets/piolo.png';
@@ -89,15 +89,8 @@ function App() {
 
 
   const [videoPlaying, setVideoPlaying] = useState(true);
-  const [videoBlocked, setVideoBlocked] = useState(false);
   const [introGone, setIntroGone] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-    videoRef.current.play().catch(() => setVideoBlocked(true));
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = introComplete ? '' : 'hidden';
@@ -260,24 +253,14 @@ function App() {
             transition={{ duration: 0.6 }}
           >
             <video
-              ref={videoRef}
               className="dragon-video"
+              autoPlay
+              muted
               playsInline
               onEnded={() => setVideoPlaying(false)}
             >
               <source src={`${process.env.PUBLIC_URL}/dragon.mp4`} type="video/mp4" />
             </video>
-            {videoBlocked && (
-              <button
-                className="dragon-tap-play"
-                onClick={() => {
-                  setVideoBlocked(false);
-                  videoRef.current?.play();
-                }}
-              >
-                tap to play
-              </button>
-            )}
             <button
               className="dragon-skip"
               onClick={() => setVideoPlaying(false)}
