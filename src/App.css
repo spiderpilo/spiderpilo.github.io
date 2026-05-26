@@ -141,6 +141,46 @@
   color: rgba(255, 255, 255, 0.28);
 }
 
+/* ── Dragon intro video ───────────────────────────────────── */
+.dragon-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dragon-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dragon-skip {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 8px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: inherit;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dragon-skip:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+}
+
 * {
   box-sizing: border-box;
 }

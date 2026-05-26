@@ -89,6 +89,7 @@ function App() {
 
 
   const [introGone, setIntroGone] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
 
   useEffect(() => {
@@ -213,7 +214,7 @@ function App() {
 
   return (
     <>
-      <AnimatePresence onExitComplete={() => setIntroComplete(true)}>
+      <AnimatePresence onExitComplete={() => setVideoPlaying(true)}>
         {!introGone && (
           <motion.div
             className="intro-overlay"
@@ -238,6 +239,33 @@ function App() {
                 </div>
               </motion.button>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {videoPlaying && !introComplete && (
+          <motion.div
+            className="dragon-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <video
+              className="dragon-video"
+              autoPlay
+              playsInline
+              onEnded={() => { setVideoPlaying(false); setIntroComplete(true); }}
+            >
+              <source src={`${process.env.PUBLIC_URL}/dragon.mp4`} type="video/mp4" />
+            </video>
+            <button
+              className="dragon-skip"
+              onClick={() => { setVideoPlaying(false); setIntroComplete(true); }}
+            >
+              skip
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
