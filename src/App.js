@@ -1,7 +1,7 @@
 import './App.css';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FaGithub, FaLinkedin, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaExternalLinkAlt, FaChevronDown } from 'react-icons/fa';
 
 import pioloIcon from './Assets/piolo.png';
 import pioloIconWhite from './Assets/piolo_white.png';
@@ -16,6 +16,7 @@ import mirrortaleVideo from './Assets/mirrortale.mp4';
 import assistiveVideo from './Assets/assistivecompanion.mp4';
 import dronePic from './Assets/Drone1.png';
 import evIcon from './Assets/EV-ICON.png';
+import evVideo from './Assets/EV.mp4';
 import pcb1Video from './Assets/PCB1.mp4';
 
 const buttonsContainer = {
@@ -59,9 +60,9 @@ const projectCardMotion = {
 };
 
 const sectionIntroMotion = (delay = 0) => ({
-  initial: { opacity: 0, y: 36, filter: 'blur(6px)' },
-  whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
-  transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1], delay },
+  initial: { opacity: 0, y: 36, scale: 0.82, filter: 'blur(6px)' },
+  whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+  transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay },
   viewport: { once: true, amount: 0.6 },
 });
 
@@ -104,6 +105,19 @@ function App() {
     setRevealedCards(prev => new Set([...prev, key]));
   }, []);
 
+  const [expandedCards, setExpandedCards] = useState(new Set());
+  const toggleExpanded = useCallback((key) => {
+    setExpandedCards(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  }, []);
+
   const droneTags = [
     'Python', 'OpenCV', 'YOLO', 'Raspberry Pi',
     'Pixhawk', 'ArduPilot', 'MAVLink', 'Linux',
@@ -136,6 +150,7 @@ function App() {
       {
         title: 'EV',
         image: evIcon,
+        video: evVideo,
         alt: 'EV',
         tech: ['Python', 'Linux', 'Qwen 2.5-3B', 'QLoRA / PEFT', 'OpenCV'],
         description:
@@ -442,23 +457,16 @@ function App() {
 
             <div className="drone-description">
               <p>
-                An ongoing autonomous UAV project focused on combining AI, robotics, and embedded systems
-                into a custom-built aerial platform. The system integrates a Raspberry Pi companion
-                computer, Pixhawk flight controller, computer vision pipelines, and real-time telemetry
-                to explore physical AI applications such as subject tracking, autonomous assistance, and
-                environmental awareness.
+                An ongoing autonomous UAV project combining AI, robotics, and embedded systems into a
+                custom-built aerial platform — a Raspberry Pi companion computer, Pixhawk flight
+                controller, computer vision pipelines, and real-time telemetry working together for
+                subject tracking, autonomous assistance, and environmental awareness.
               </p>
               <p>
-                The project involves both hardware and software engineering, including drone assembly,
-                power distribution, sensor integration, embedded programming, computer vision
-                experimentation, and AI-assisted navigation workflows. Current development includes
-                integrating person detection using OpenCV and YOLO models on a Raspberry Pi while
-                communicating with the flight controller through MAVLink telemetry systems.
-              </p>
-              <p>
-                This project is being developed incrementally as a long-term engineering and research
-                platform to deepen my understanding of autonomous systems, edge AI, robotics, and
-                intelligent human-machine interaction.
+                Spans both hardware and software: drone assembly, power distribution, sensor integration,
+                and embedded programming, plus AI-assisted navigation. Currently integrating OpenCV/YOLO
+                person detection on the Raspberry Pi, communicating with the flight controller over
+                MAVLink — a long-term platform for exploring edge AI and autonomous systems.
               </p>
             </div>
 
@@ -544,6 +552,8 @@ function App() {
                 <div className="card-mask">
                   <img src={pioloIcon} alt="" className="card-mask-icon" />
                 </div>
+                <h3 className="project-title">{p.title}</h3>
+
                 <div className="project-image-wrap">
                   {p.video ? (
                     <video className="project-image" autoPlay muted loop playsInline>
@@ -555,23 +565,42 @@ function App() {
                 </div>
 
                 <div className="project-content">
-                  <h3 className="project-title">{p.title}</h3>
-
-                  <div className="tech-row">
-                    {p.tech.map((t) => (
-                      <span key={t} className="tech-chip">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
                   <p className="project-description">{p.description}</p>
 
-                  <ul className="project-highlights">
-                    {p.highlights.map((h) => (
-                      <li key={h}>{h}</li>
-                    ))}
-                  </ul>
+                  <button
+                    className={`project-more-btn${expandedCards.has(p.title) ? ' is-expanded' : ''}`}
+                    onClick={() => toggleExpanded(p.title)}
+                    aria-expanded={expandedCards.has(p.title)}
+                  >
+                    {expandedCards.has(p.title) ? 'Less' : 'More'}
+                    <FaChevronDown size={11} className="project-more-icon" />
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {expandedCards.has(p.title) && (
+                      <motion.div
+                        className="project-expand"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <div className="tech-row">
+                          {p.tech.map((t) => (
+                            <span key={t} className="tech-chip">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+
+                        <ul className="project-highlights">
+                          {p.highlights.map((h) => (
+                            <li key={h}>{h}</li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   <div className="project-actions">
                     {p.liveUrl && (

@@ -304,6 +304,20 @@ p {
   z-index: 1;
 }
 
+.robotics-section,
+.software-section,
+.pcb-section {
+  margin-top: 140px;
+}
+
+@media (max-width: 640px) {
+  .robotics-section,
+  .software-section,
+  .pcb-section {
+    margin-top: 80px;
+  }
+}
+
 h2 {
   margin: 8px 0 14px;
   color: var(--accent);
@@ -429,6 +443,10 @@ h2 {
   padding-right: 28px;
 }
 
+.software-section {
+  max-width: 1560px;
+}
+
 .empty-state {
   margin-top: 24px;
   padding: 48px 32px;
@@ -447,8 +465,9 @@ h2 {
 
 .projects-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+  align-items: start;
   column-gap: 24px;
   row-gap: 44px;
   margin-top: 24px;
@@ -460,7 +479,6 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  min-height: 100%;
   padding: 14px;
   border-radius: 22px;
   background: var(--card);
@@ -612,11 +630,16 @@ h2 {
 }
 
 .project-title {
-  margin: 0 0 6px;
-  font-size: 1.35rem;
+  margin: 0;
+  font-size: 1.55rem;
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   color: #fff;
+  text-align: center;
+  text-shadow:
+    0 0 20px rgba(143, 211, 255, 0.3),
+    0 0 44px rgba(143, 211, 255, 0.12);
 }
 
 .tech-row {
@@ -646,9 +669,49 @@ h2 {
 
 .project-description {
   opacity: 0.92;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-size: 0.92rem;
   line-height: 1.5;
+}
+
+.project-more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0 auto 4px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(143, 211, 255, 0.2);
+  background: rgba(143, 211, 255, 0.06);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.project-more-btn:hover {
+  border-color: rgba(143, 211, 255, 0.4);
+  background: rgba(143, 211, 255, 0.12);
+  box-shadow: 0 0 18px rgba(143, 211, 255, 0.1);
+}
+
+.project-more-icon {
+  transition: transform 0.3s ease;
+}
+
+.project-more-btn.is-expanded .project-more-icon {
+  transform: rotate(180deg);
+}
+
+.project-expand {
+  overflow: hidden;
 }
 
 .project-highlights {
@@ -694,7 +757,7 @@ h2 {
 /* DRONE FEATURED CARD */
 .drone-card {
   width: 100%;
-  max-width: 1040px;
+  max-width: 920px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 24px;
@@ -830,7 +893,7 @@ h2 {
 
 /* Drone content */
 .drone-content {
-  padding: 36px 40px 40px;
+  padding: 28px 36px 32px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -838,25 +901,25 @@ h2 {
 }
 
 .drone-title {
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #fff;
-  margin: 0 0 20px;
+  margin: 0 0 14px;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
 .drone-description {
-  margin-bottom: 28px;
-  max-width: 760px;
+  margin-bottom: 18px;
+  max-width: 700px;
   text-align: left;
 }
 
 .drone-description p {
   color: rgba(255, 255, 255, 0.78);
-  font-size: 0.93rem;
-  line-height: 1.7;
-  margin: 0 0 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 9px;
   max-width: 100%;
 }
 
@@ -878,7 +941,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   justify-content: center;
   max-width: 720px;
 }
@@ -910,7 +973,7 @@ h2 {
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: 22px;
 }
 
 /* Dev log */
@@ -1096,6 +1159,12 @@ h2 {
 }
 
 /* RESPONSIVE */
+@media (max-width: 1550px) {
+  .projects-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 1100px) {
   .projects-list {
     column-gap: 20px;
