@@ -439,6 +439,8 @@ function App() {
           <div className="card-mask">
             <img src={pioloIcon} alt="" className="card-mask-icon" />
           </div>
+          <h3 className="drone-title">AI Vision Drone / Autonomous UAV Platform</h3>
+
           {/* Banner */}
           <div className="drone-banner">
             <img src={dronePic} alt="AI Vision Drone" className="drone-banner-img" loading="lazy" />
@@ -453,8 +455,6 @@ function App() {
 
           {/* Content */}
           <div className="drone-content">
-            <h3 className="drone-title">AI Vision Drone / Autonomous UAV Platform</h3>
-
             <div className="drone-description">
               <p>
                 An ongoing autonomous UAV project combining AI, robotics, and embedded systems into a
@@ -470,23 +470,44 @@ function App() {
               </p>
             </div>
 
-            <p className="drone-section-label">Technologies</p>
-            <div className="drone-chip-grid">
-              {droneTags.map((tag) => (
-                <motion.span
-                  key={tag}
-                  className="drone-chip"
-                  whileHover={shouldReduceMotion ? undefined : { scale: 1.06, y: -2 }}
-                  transition={{ duration: 0.15 }}
+            <button
+              className={`project-more-btn${expandedCards.has('drone') ? ' is-expanded' : ''}`}
+              onClick={() => toggleExpanded('drone')}
+              aria-expanded={expandedCards.has('drone')}
+            >
+              {expandedCards.has('drone') ? 'Less' : 'More'}
+              <FaChevronDown size={11} className="project-more-icon" />
+            </button>
+
+            <AnimatePresence initial={false}>
+              {expandedCards.has('drone') && (
+                <motion.div
+                  className="project-expand"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {tag}
-                </motion.span>
-              ))}
-            </div>
+                  <p className="drone-section-label">Technologies</p>
+                  <div className="drone-chip-grid">
+                    {droneTags.map((tag) => (
+                      <motion.span
+                        key={tag}
+                        className="drone-chip"
+                        whileHover={shouldReduceMotion ? undefined : { scale: 1.06, y: -2 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div className="drone-actions">
-              <button className="my-button project-button icon-btn" onClick={() => openLink('https://github.com/spiderpilo/Drone_AI_UAV')}>
-                <FaGithub size={18} />
+              <button className="my-button project-button" onClick={() => openLink('https://github.com/spiderpilo/Drone_AI_UAV')}>
+                <FaGithub size={18} /> GitHub
               </button>
               <button
                 className="my-button project-button"
@@ -635,6 +656,8 @@ function App() {
               <div className="card-mask">
                 <img src={pioloIcon} alt="" className="card-mask-icon" />
               </div>
+              <h3 className="project-title">{p.title}</h3>
+
               <div className="pcb-image-gallery">
                 {p.images.map((img) => (
                   <div key={img.label} className="pcb-image-item">
@@ -653,23 +676,42 @@ function App() {
               </div>
 
               <div className="project-content">
-                <h3 className="project-title">{p.title}</h3>
-
-                <div className="tech-row">
-                  {p.tech.map((t) => (
-                    <span key={t} className="tech-chip">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
                 <p className="project-description">{p.description}</p>
 
-                <ul className="project-highlights">
-                  {p.highlights.map((h) => (
-                    <li key={h}>{h}</li>
-                  ))}
-                </ul>
+                <button
+                  className={`project-more-btn${expandedCards.has(p.title) ? ' is-expanded' : ''}`}
+                  onClick={() => toggleExpanded(p.title)}
+                  aria-expanded={expandedCards.has(p.title)}
+                >
+                  {expandedCards.has(p.title) ? 'Less' : 'More'}
+                  <FaChevronDown size={11} className="project-more-icon" />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {expandedCards.has(p.title) && (
+                    <motion.div
+                      className="project-expand"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <div className="tech-row">
+                        {p.tech.map((t) => (
+                          <span key={t} className="tech-chip">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      <ul className="project-highlights">
+                        {p.highlights.map((h) => (
+                          <li key={h}>{h}</li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <div className="project-actions">
                   <button className="my-button project-button icon-btn" onClick={() => openLink(p.githubUrl)}>

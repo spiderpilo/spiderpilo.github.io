@@ -631,6 +631,10 @@ h2 {
 
 .project-title {
   margin: 0;
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.55rem;
   font-weight: 800;
   line-height: 1.2;
@@ -672,34 +676,49 @@ h2 {
   margin: 0 0 14px;
   font-size: 0.92rem;
   line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.5em * 3);
 }
 
 .project-more-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin: 0 auto 4px;
-  padding: 7px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(143, 211, 255, 0.2);
-  background: rgba(143, 211, 255, 0.06);
-  color: var(--accent);
-  font-size: 0.78rem;
+  gap: 8px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--btn);
+  color: var(--text);
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   cursor: pointer;
   transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.35),
+    0 0 0 rgba(143, 211, 255, 0);
 }
 
 .project-more-btn:hover {
-  border-color: rgba(143, 211, 255, 0.4);
-  background: rgba(143, 211, 255, 0.12);
-  box-shadow: 0 0 18px rgba(143, 211, 255, 0.1);
+  background: var(--btn-hover);
+  border-color: rgba(143, 211, 255, 0.24);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(143, 211, 255, 0.14),
+    0 0 42px rgba(143, 211, 255, 0.08);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .project-more-icon {
@@ -893,7 +912,7 @@ h2 {
 
 /* Drone content */
 .drone-content {
-  padding: 28px 36px 32px;
+  padding: 22px 36px 32px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -904,9 +923,14 @@ h2 {
   font-size: 1.6rem;
   font-weight: 800;
   color: #fff;
-  margin: 0 0 14px;
+  margin: 0;
+  padding: 24px 32px 18px;
   line-height: 1.2;
   letter-spacing: -0.01em;
+  text-align: center;
+  text-shadow:
+    0 0 20px rgba(143, 211, 255, 0.3),
+    0 0 44px rgba(143, 211, 255, 0.12);
 }
 
 .drone-description {
@@ -969,11 +993,12 @@ h2 {
 }
 
 .drone-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 0 22px;
 }
 
 /* Dev log */
