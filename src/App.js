@@ -15,6 +15,7 @@ import fatedeckVideo from './Assets/fatedeck.mp4';
 import mirrortaleVideo from './Assets/mirrortale.mp4';
 import assistiveVideo from './Assets/assistivecompanion.mp4';
 import dronePic from './Assets/Drone1.png';
+import evIcon from './Assets/EV-ICON.png';
 import pcb1Video from './Assets/PCB1.mp4';
 
 const buttonsContainer = {
@@ -132,6 +133,20 @@ function App() {
 
   const projects = useMemo(
     () => [
+      {
+        title: 'EV',
+        image: evIcon,
+        alt: 'EV',
+        tech: ['Python', 'Linux', 'Qwen 2.5-3B', 'QLoRA / PEFT', 'OpenCV'],
+        description:
+          'A fully local AI voice assistant for Linux — wake-word detection, speech-to-text, LLM inference, and neural text-to-speech with zero cloud dependencies for private, low-latency interactions.',
+        highlights: [
+          'Fine-tuned Qwen 2.5-3B via QLoRA (4-bit NF4, LoRA rank 16) with PEFT, TRL, and bitsandbytes on an 8GB RTX 5060',
+          'Biometric authentication pipeline combining facial recognition and speaker verification to identify users before processing commands',
+          'Voice-controlled terminal with natural language command execution, safety filtering, automatic GUI app launching, and a shortcut system that bypasses LLM inference for frequent commands',
+        ],
+        githubUrl: 'https://github.com/spiderpilo/EV',
+      },
       {
         title: 'Assistive Social Cue Companion',
         image: socialCuePic,
